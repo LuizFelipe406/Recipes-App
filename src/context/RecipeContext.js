@@ -1,25 +1,36 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import mockDoneRecipes from '../mocks/mockDoneRecipes';
 
 const RecipeContext = createContext();
 
 export default RecipeContext;
 
 export function RecipeProvider({ children }) {
+  /* Criando um mock para produzir o DoneRecipes */
+  if (localStorage.getItem('doneRecipes') === null) {
+    localStorage.setItem('doneRecipes', mockDoneRecipes);
+  }
+
   const [data, setData] = useState([{ srtMeal: '' }]);
-  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [doneRecipes, setDoneRecipes] = useState(
+    JSON.parse(localStorage.getItem('doneRecipes')),
+  );
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [inProgressRecipes, setInProgressRecipes] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState(doneRecipes);
 
   const contextValue = {
     data,
     setData,
     doneRecipes,
+    setDoneRecipes,
     favoriteRecipes,
+    setFavoriteRecipes,
     inProgressRecipes,
-    setDoneRecipes, // pro lint nao reclamar
-    setFavoriteRecipes, // pro lint nao reclamar
-    setInProgressRecipes, // pro lint nao reclamar
+    setInProgressRecipes,
+    filteredRecipes,
+    setFilteredRecipes,
   };
 
   return (
