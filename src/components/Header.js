@@ -52,7 +52,7 @@ function Header({ pathname }) {
         }
       </header>
       {
-        showSearchBar && <SearchBar />
+        showSearchBar && <SearchBar pathname={ pathname } />
       }
     </div>
   );
