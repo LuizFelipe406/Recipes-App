@@ -43,28 +43,39 @@ function SearchBar({ pathname }) {
         onChange={ handleChange }
       />
       <div>
-
-        <input
-          type="radio"
-          name="option"
-          data-testid="ingredient-search-radio"
-          value="ingredient"
-          onChange={ handleChange }
-        />
-        <input
-          type="radio"
-          name="option"
-          data-testid="name-search-radio"
-          value="name"
-          onChange={ handleChange }
-        />
-        <input
-          type="radio"
-          name="option"
-          data-testid="first-letter-search-radio"
-          value="first-letter"
-          onChange={ handleChange }
-        />
+        <label htmlFor="ingredient">
+          <input
+            id="ingredient"
+            type="radio"
+            name="option"
+            data-testid="ingredient-search-radio"
+            value="ingredient"
+            onChange={ handleChange }
+          />
+          Ingredient
+        </label>
+        <label htmlFor="name">
+          <input
+            id="name"
+            type="radio"
+            name="option"
+            data-testid="name-search-radio"
+            value="name"
+            onChange={ handleChange }
+          />
+          Name
+        </label>
+        <label htmlFor="first-letter">
+          <input
+            id="first-letter"
+            type="radio"
+            name="option"
+            data-testid="first-letter-search-radio"
+            value="first-letter"
+            onChange={ handleChange }
+          />
+          First Letter
+        </label>
       </div>
       <button
         type="button"

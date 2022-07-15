@@ -9,7 +9,6 @@ export const fetchFoods = async () => {
   const resultFetch = await fetch(endpoint)
     .then((result) => result.json()).then((json) => json);
   const filteredFilter = resultFetch.meals.slice(0, +'12');
-  console.log(filteredFilter);
   return (filteredFilter);
 };
 

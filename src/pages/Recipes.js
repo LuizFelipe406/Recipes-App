@@ -19,12 +19,28 @@ function Recipes({ history: { location: { pathname } } }) {
     getInfo();
   }, [pathname, setData]);
 
+  console.log(data);
+
   return (
     <div>
       <Header pathname={ pathname } />
       pagina de Recipes
       {
-        data[0].strMeal
+        data.map((item, index) => (
+          <div
+            key={ index }
+            data-testid={ `${index}-recipe-card` }
+          >
+            <img
+              src={ pathname === '/foods' ? item.strMealThumb : item.strDrinkThumb }
+              alt={ pathname === '/foods' ? item.strMeal : item.strDrink }
+              data-testid={ `${index}-card-img` }
+            />
+            <span data-testid={ `${index}-card-name` }>
+              { pathname === '/foods' ? item.strMeal : item.strDrink }
+            </span>
+          </div>
+        ))
       }
     </div>
   );
