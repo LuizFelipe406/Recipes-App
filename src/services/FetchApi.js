@@ -59,3 +59,27 @@ export const fetchFoodById = async (id) => {
   const resultFetch = await fetch(endpoint).then((result) => result.json());
   return (resultFetch.meals);
 };
+
+export const fetchCategoryDrinks = async () => {
+  const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+  const resultFetch = await fetch(endpoint).then((result) => result.json());
+  return (resultFetch.drinks.filter((item, index) => index < +'5'));
+};
+
+export const fetchCategoryFoods = async () => {
+  const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+  const resultFetch = await fetch(endpoint).then((result) => result.json());
+  return (resultFetch.meals.filter((item, index) => index < +'5'));
+};
+
+export const fetchDrinksByCategory = async (category) => {
+  const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
+  const resultFetch = await fetch(endpoint).then((result) => result.json());
+  return resultFetch.drinks.filter((item, index) => index < +'12');
+};
+
+export const fetchFoodsByCategory = async (category) => {
+  const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
+  const resultFetch = await fetch(endpoint).then((result) => result.json());
+  return resultFetch.meals.filter((item, index) => index < +'12');
+};
