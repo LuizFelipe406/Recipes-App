@@ -14,49 +14,49 @@ export const fetchFoods = async () => {
 };
 
 export const fetchDrinksByName = async (name) => {
-  const endpoint = `www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
+  const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
   return (resultFetch.drinks.filter((item, index) => index < +'12'));
 };
 
 export const fetchFoodsByName = async (name) => {
-  const endpoint = `www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
+  const endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
   return (resultFetch.meals.filter((item, index) => index < +'12'));
 };
 
 export const fetchDrinksByFirstLetter = async (letter) => {
-  const endpoint = `www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`;
+  const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
   return (resultFetch.drinks.filter((item, index) => index < +'12'));
 };
 
 export const fetchFoodsByFirstLetter = async (letter) => {
-  const endpoint = `www.themealdb.com/api/json/v1/1/search.php?f=${letter}`;
+  const endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
   return (resultFetch.meals.filter((item, index) => index < +'12'));
 };
 
 export const fetchDrinksByIngredient = async (ingredient) => {
-  const endpoint = `www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+  const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
   return (resultFetch.drinks.filter((item, index) => index < +'12'));
 };
 
 export const fetchFoodsByIngredient = async (ingredient) => {
-  const endpoint = `www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+  const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
   return (resultFetch.meals.filter((item, index) => index < +'12'));
 };
 
 export const fetchDrinkById = async (id) => {
-  const endpoint = `www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
   return (resultFetch.drinks);
 };
 
 export const fetchFoodById = async (id) => {
-  const endpoint = `www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
   return (resultFetch.meals);
 };

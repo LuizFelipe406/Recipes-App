@@ -1,0 +1,16 @@
+footer {
+  bottom: 0%;
+  position: fixed;
+}
+
+.foods {
+  bottom: 0%;
+  left: 10%;
+  position: fixed;
+}
+
+.drinks {
+  bottom: 0%;
+  left: 80%;
+  position: fixed;
+}

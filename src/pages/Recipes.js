@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RecipeContext from '../context/RecipeContext';
 import { fetchDrinks, fetchFoods } from '../services/FetchApi';
+import Header from '../components/Header';
 
 function Recipes({ history: { location: { pathname } } }) {
   const { data, setData } = useContext(RecipeContext);
@@ -20,6 +21,7 @@ function Recipes({ history: { location: { pathname } } }) {
 
   return (
     <div>
+      <Header pathname={ pathname } />
       pagina de Recipes
       {
         data[0].strMeal
