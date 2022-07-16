@@ -1,12 +1,15 @@
+import drinkIcon from '../images/drinkIcon.svg';
+import mealIcon from '../images/mealIcon.svg';
+
 const mockDoneRecipes = [
   {
     id: 357852,
     type: 'drink',
-    nationality: 'colombiana',
+    nationality: 'Colombiana',
     category: '',
     alcoholicOrNot: 'Alcoholic',
     name: 'Aliento de Fallecido',
-    image: '/static/media/drinkIcon.efc0d3c156e5da73e44a826c8d67b142.svg',
+    image: drinkIcon,
     doneDate: '17/08/1863',
     tags: [
       'Deadly',
@@ -16,11 +19,11 @@ const mockDoneRecipes = [
   {
     id: 194862,
     type: 'food',
-    nationality: 'sueca',
+    nationality: 'Sueca',
     category: 'Lanche',
     alcoholicOrNot: '',
     name: 'Surstromming',
-    image: '/static/media/mealIcon.40029e7f1422ba5a1bf1c10fa4f59030.svg',
+    image: mealIcon,
     doneDate: '23/05/2019',
     tags: [
       'Fish',
@@ -30,11 +33,11 @@ const mockDoneRecipes = [
   {
     id: 648354,
     type: 'drink',
-    nationality: 'iraniana',
+    nationality: 'Iraniana',
     category: '',
     alcoholicOrNot: 'Non-Alcoholic',
     name: 'Aryan',
-    image: '/static/media/drinkIcon.efc0d3c156e5da73e44a826c8d67b142.svg',
+    image: drinkIcon,
     doneDate: '09/03/2022',
     tags: [
       'Yogurt',
@@ -44,11 +47,11 @@ const mockDoneRecipes = [
   {
     id: 375884,
     type: 'food',
-    nationality: 'malauiana',
+    nationality: 'Malauiana',
     category: 'Salad',
     alcoholicOrNot: '',
     name: 'Kachumbari',
-    image: '/static/media/mealIcon.40029e7f1422ba5a1bf1c10fa4f59030.svg',
+    image: mealIcon,
     doneDate: '07/10/1997',
     tags: [
       'Simple',

@@ -9,7 +9,7 @@ export default RecipeContext;
 export function RecipeProvider({ children }) {
   /* Criando um mock para produzir o DoneRecipes */
   if (localStorage.getItem('doneRecipes') === null) {
-    localStorage.setItem('doneRecipes', mockDoneRecipes);
+    localStorage.setItem('doneRecipes', JSON.stringify(mockDoneRecipes));
   }
 
   const [data, setData] = useState([{ srtMeal: '' }]);
