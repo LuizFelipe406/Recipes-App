@@ -2,14 +2,10 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import DoneFavFilter from '../components/DoneFavFilter';
 import RecipeContext from '../context/RecipeContext';
-import shareIcon from '../images/shareIcon.svg';
+import ShareButton from '../components/ShareButton';
 
 function DoneRecipes() {
   const { filteredRecipes } = useContext(RecipeContext);
-
-  const shareClick = ({ target: { value } }) => {
-    console.log(value);
-  };
 
   const createRecipeCards = (recipe, index) => (
     <div key={ recipe.id }>
@@ -22,14 +18,7 @@ function DoneRecipes() {
           height="100px"
         />
       </Link>
-      <input
-        type="image"
-        alt={ `Compartilhar receita de ${recipe.name}` }
-        src={ shareIcon }
-        onClick={ shareClick }
-        data-testid={ `${index}-horizontal-share-btn` }
-        value={ `/${recipe.type}s/${recipe.id}` }
-      />
+      <ShareButton recipe={ recipe } index={ index } />
       <p data-testid={ `${index}-horizontal-top-text` }>
         {recipe.type === 'food'
           ? `${recipe.nationality} - ${recipe.category}`
