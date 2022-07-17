@@ -9,7 +9,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import Recipes from './pages/Recipes';
 import Login from './pages/Login';
 import { RecipeProvider } from './context/RecipeContext';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

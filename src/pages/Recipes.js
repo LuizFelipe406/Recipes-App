@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import RecipeContext from '../context/RecipeContext';
 import { fetchDrinks, fetchFoods } from '../services/FetchApi';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Recipes({ history: { location: { pathname } } }) {
   const { data, setData } = useContext(RecipeContext);
@@ -20,13 +21,16 @@ function Recipes({ history: { location: { pathname } } }) {
   }, [pathname, setData]);
 
   return (
-    <div>
-      <Header pathname={ pathname } />
-      pagina de Recipes
-      {
-        data[0].strMeal
-      }
-    </div>
+    <>
+      <div>
+        <Header pathname={ pathname } />
+        pagina de Recipes
+        {
+          data[0].strMeal
+        }
+      </div>
+      <Footer />
+    </>
   );
 }
 

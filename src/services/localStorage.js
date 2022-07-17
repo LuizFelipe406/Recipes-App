@@ -9,3 +9,11 @@ export const cleanLocalStorage = () => {
   localStorage.removeItem('mealsToken');
   localStorage.removeItem('cocktailsToken');
 };
+
+export const getEmail = () => {
+  const response = localStorage.getItem('user');
+  if (response) {
+    return JSON.parse(response).email;
+  }
+  return 'Email not found';
+};
