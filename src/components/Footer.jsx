@@ -9,19 +9,25 @@ function Footer() {
     <footer data-testid="footer">
       <Link
         className="drinks"
-        data-testid="drinks-bottom-btn"
         to="/drinks"
         alt="drinks"
       >
-        <img src={ imageDrink } alt="drinkIcon" />
+        <img
+          data-testid="drinks-bottom-btn"
+          src={ imageDrink }
+          alt="drinkIcon"
+        />
       </Link>
       <Link
         className="foods"
-        data-testid="food-bottom-btn"
         to="/foods"
         alt="foods"
       >
-        <img src={ imageMeal } alt="mealIcon" />
+        <img
+          data-testid="food-bottom-btn"
+          src={ imageMeal }
+          alt="mealIcon"
+        />
       </Link>
     </footer>
   );
