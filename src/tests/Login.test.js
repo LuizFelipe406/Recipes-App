@@ -2,10 +2,11 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 import App from "../App";
+import renderWithRouter from "./renderWithRouter";
 
 describe('Testes da tela de Login', () => {
   it('1 - Verifica se os componentes estão na tela', () => {
-    render(<App />);
+    renderWithRouter(<App />);
 
     const email = screen.getByTestId('email-input');
     expect(email).toBeInTheDocument();
@@ -18,7 +19,7 @@ describe('Testes da tela de Login', () => {
   });
 
   it('2 - Verifica se o botão está desabilitado caso o email seja inválido', () => {
-    render(<App />);
+    renderWithRouter(<App />);
 
     const invalidEmail = 'lucas.com';
     const userPassword = '1234567';
@@ -35,7 +36,7 @@ describe('Testes da tela de Login', () => {
   });
 
   it('3 - Verifica se o botão está desabilitado caso a senha seja inválido', () => {
-    render(<App />);
+    renderWithRouter(<App />);
 
     const invalidPassword = '0123';
     const userEmail = 'lucas@mail.com';
@@ -52,7 +53,7 @@ describe('Testes da tela de Login', () => {
   });
 
   it('4 - Verifica se o botão está Habilitado caso o email e a senha sejam válidos', () => {
-    render(<App />);
+    renderWithRouter(<App />);
 
     const validPassword = '1234567';
     const validEmail = 'lucas@mail.com';
@@ -68,7 +69,7 @@ describe('Testes da tela de Login', () => {
   });
 
   it('5 - Verifica se ao logar o email é salvo no local Storage', () => {
-    render(<App />);
+    renderWithRouter(<App />);
 
     const validPassword = '1234567';
     const validEmail = 'lucas@mail.com';
