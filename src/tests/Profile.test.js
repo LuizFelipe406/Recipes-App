@@ -24,6 +24,16 @@ describe('Testa o componente Profiel', () => {
     userEvent.click(logout);
     expect(history.location.pathname).toBe('/');    
 
-  
   });
+test('Testa retorno da função getEmail do localstorage', async () => {
+    const { history } = renderWithRouter(<App />);
+
+    const email = { email: 'beto@uol.com.br' }  
+    localStorage.setItem('user',JSON.stringify(email));
+  
+    history.push('/profile');
+ 
+    expect(screen.getByText(/beto@uol.com.br/ig)).toBeInTheDocument();
+  });
+
 });

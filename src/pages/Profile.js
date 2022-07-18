@@ -8,7 +8,6 @@ import { getEmail } from '../services/localStorage';
 function Profile({ history: { location: { pathname } } }) {
   const email = getEmail();
   const history = useHistory();
-  console.log(email);
   return (
     <div>
       <Header pathname={ pathname } />
