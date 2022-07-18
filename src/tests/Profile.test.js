@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 
 
-describe('Testa o componente Profiel', () => {
+describe('Testa o componente Profile', () => {
   test('Testa rotas botões Profile', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/profile');

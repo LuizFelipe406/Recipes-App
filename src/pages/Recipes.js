@@ -22,8 +22,6 @@ function Recipes({ history: { location: { pathname } } }) {
     getInfo();
   }, [pathname, setData]);
 
-  console.log(data);
-
   return (
     <div>
       <Header pathname={ pathname } />
