@@ -5,6 +5,7 @@ import RecipeContext from '../context/RecipeContext';
 import { fetchDrinks, fetchFoods } from '../services/FetchApi';
 import Header from '../components/Header';
 import CategoryFilters from '../components/CategoryFilters';
+import Footer from '../components/Footer';
 
 function Recipes({ history: { location: { pathname } } }) {
   const { data, setData } = useContext(RecipeContext);
@@ -52,6 +53,7 @@ function Recipes({ history: { location: { pathname } } }) {
           </Link>
         ))
       }
+     <Footer />
     </div>
   );
 }
