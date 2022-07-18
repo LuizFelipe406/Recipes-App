@@ -68,7 +68,25 @@ describe('Testa SearchBar', () => {
   
   });
 
+  test('Testa procurando por nome', async () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/drinks');
 
+    const searchBtn = await screen.findByTestId('search-top-btn');
+    userEvent.click(searchBtn)
+
+    const inputSearch = await screen.findByTestId('search-input');
+    userEvent.type(inputSearch, 'adam')
+
+    const nameRadio = await screen.findByTestId('name-search-radio');
+    userEvent.click(nameRadio)
+
+    const btnSearch = await screen.findByTestId('exec-search-btn');
+    userEvent.click(btnSearch)
+
+    expect(await screen.findAllByText(/Adam bomb/ig))
+  
+  });
 
 });
 
