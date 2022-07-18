@@ -53,7 +53,7 @@ function Recipes({ history: { location: { pathname } } }) {
           </Link>
         ))
       }
-     <Footer />
+      <Footer />
     </div>
   );
 }
