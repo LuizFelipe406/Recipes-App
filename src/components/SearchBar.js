@@ -50,6 +50,7 @@ function SearchBar({ pathname }) {
             name="option"
             data-testid="ingredient-search-radio"
             value="ingredient"
+            placeholder="Search"
             onChange={ handleChange }
           />
           Ingredient
