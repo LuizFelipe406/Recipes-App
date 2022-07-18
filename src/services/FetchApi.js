@@ -15,36 +15,54 @@ export const fetchFoods = async () => {
 export const fetchDrinksByName = async (name) => {
   const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
+  if (resultFetch.drinks === null) {
+    return [resultFetch.drinks];
+  }
   return (resultFetch.drinks.filter((item, index) => index < +'12'));
 };
 
 export const fetchFoodsByName = async (name) => {
   const endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
+  if (resultFetch.meals === null) {
+    return [resultFetch.meals];
+  }
   return (resultFetch.meals.filter((item, index) => index < +'12'));
 };
 
 export const fetchDrinksByFirstLetter = async (letter) => {
   const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
+  if (resultFetch.drinks === null) {
+    return [resultFetch.drinks];
+  }
   return (resultFetch.drinks.filter((item, index) => index < +'12'));
 };
 
 export const fetchFoodsByFirstLetter = async (letter) => {
   const endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
+  if (resultFetch.meals === null) {
+    return [resultFetch.meals];
+  }
   return (resultFetch.meals.filter((item, index) => index < +'12'));
 };
 
 export const fetchDrinksByIngredient = async (ingredient) => {
   const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
+  if (resultFetch.drinks === null) {
+    return [resultFetch.drinks];
+  }
   return (resultFetch.drinks.filter((item, index) => index < +'12'));
 };
 
 export const fetchFoodsByIngredient = async (ingredient) => {
   const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   const resultFetch = await fetch(endpoint).then((result) => result.json());
+  if (resultFetch.meals === null) {
+    return [resultFetch.meals];
+  }
   return (resultFetch.meals.filter((item, index) => index < +'12'));
 };
 

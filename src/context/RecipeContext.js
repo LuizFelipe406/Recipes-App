@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import {
   fetchCategoryDrinks,
   fetchCategoryFoods,
@@ -18,6 +19,7 @@ const RecipeContext = createContext();
 export default RecipeContext;
 
 export function RecipeProvider({ children }) {
+  const history = useHistory();
   const [data, setData] = useState(false);
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -80,36 +82,43 @@ export function RecipeProvider({ children }) {
       switch (option) {
       case 'ingredient': {
         newData = await fetchFoodsByIngredient(value);
-        setData(newData);
         break;
       }
       case 'name': {
         newData = await fetchFoodsByName(value);
-        setData(newData);
         break;
       }
       default: {
         newData = await fetchFoodsByFirstLetter(value);
-        setData(newData);
       }
+      }
+      if (newData.length > 1) {
+        setData(newData);
+      } else if (newData[0] !== null) {
+        history.push(`/foods/${newData[0].idMeal}`);
       }
     } else {
       switch (option) {
       case 'ingredient': {
         newData = await fetchDrinksByIngredient(value);
-        setData(newData);
         break;
       }
       case 'name': {
         newData = await fetchDrinksByName(value);
-        setData(newData);
         break;
       }
       default: {
         newData = await fetchDrinksByFirstLetter(value);
+      }
+      }
+      if (newData.length > 1) {
         setData(newData);
+      } else if (newData[0] !== null) {
+        history.push(`/drinks/${newData[0].idDrink}`);
       }
-      }
+    }
+    if (newData[0] === null) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
   };
 
