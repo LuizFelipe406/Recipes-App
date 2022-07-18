@@ -1,0 +1,30 @@
+.recomendations-container {
+  display: flex;
+  margin-bottom: 50px;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+}
+
+.recomendation-card {
+  border: 1px solid black;
+  border-radius: 15px;
+  margin: 20px;
+  width: 150px;
+}
+
+.recomendation-card img {
+  border-radius: 15px 15px 0 0;
+}
+
+.button-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.button-container button {
+  bottom: 0;
+  margin: auto 20px;
+  position: fixed;
+  text-align: center;
+}
