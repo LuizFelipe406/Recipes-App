@@ -101,3 +101,15 @@ export const fetchFoodsByCategory = async (category) => {
   const resultFetch = await fetch(endpoint).then((result) => result.json());
   return resultFetch.meals.filter((item, index) => index < +'12');
 };
+
+export const fetchDrinkRecomendations = async () => {
+  const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+  const resultFetch = await fetch(endpoint).then((result) => result.json());
+  return (resultFetch.drinks.filter((item, index) => index < +'6'));
+};
+
+export const fetchFoodRecomendations = async () => {
+  const endpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const resultFetch = await fetch(endpoint).then((result) => result.json());
+  return (resultFetch.meals.filter((item, index) => index < +'6'));
+};
