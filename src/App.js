@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import RecipeInProgress from './pages/RecipeInProgress';
 import RecipeDetails from './pages/RecipeDetails';
 import Profile from './pages/Profile';
@@ -10,10 +11,12 @@ import Recipes from './pages/Recipes';
 import Login from './pages/Login';
 import { RecipeProvider } from './context/RecipeContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 function App() {
   return (
     <RecipeProvider>
+      <ToastContainer theme="colored" />
       <BrowserRouter>
         <Switch>
           <Route path="/foods/:id/in-progress" component={ RecipeInProgress } />

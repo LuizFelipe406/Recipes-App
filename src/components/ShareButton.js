@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
+import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 
 function ShareButton({ recipe: { id, name, type }, index }) {
   const shareClick = ({ target: { value } }) => {
-    console.log(value);
+    copy(value);
+    toast.success('Link copied!');
   };
 
   return (
@@ -14,7 +17,7 @@ function ShareButton({ recipe: { id, name, type }, index }) {
       src={ shareIcon }
       onClick={ shareClick }
       data-testid={ `${index}-horizontal-share-btn` }
-      value={ `/${type}s/${id}` }
+      value={ `http://localhost:3000/${type}s/${id}` }
     />
   );
 }
