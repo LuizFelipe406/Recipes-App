@@ -31,6 +31,18 @@ export function RecipeProvider({ children }) {
   });
 
   useEffect(() => {
+    const storageDoneRecipes = localStorage.getItem('doneRecipes')
+    || JSON.stringify([]);
+    setDoneRecipes(JSON.parse(storageDoneRecipes));
+    const storageFavoriteRecipes = localStorage.getItem('favoriteRecipes')
+    || JSON.stringify([]);
+    setFavoriteRecipes(JSON.parse(storageFavoriteRecipes));
+    const storageInProgressRecipes = localStorage.getItem('inProgressRecipes')
+    || JSON.stringify([]);
+    setInProgressRecipes(JSON.parse(storageInProgressRecipes));
+  }, []);
+
+  useEffect(() => {
     const getCaregories = async () => {
       const foodCategories = await fetchCategoryFoods();
       const drinkCategories = await fetchCategoryDrinks();
@@ -136,9 +148,9 @@ export function RecipeProvider({ children }) {
     doneRecipes,
     favoriteRecipes,
     inProgressRecipes,
-    setDoneRecipes, // pro lint nao reclamar
-    setFavoriteRecipes, // pro lint nao reclamar
-    setInProgressRecipes, // pro lint nao reclamar
+    setDoneRecipes,
+    setFavoriteRecipes,
+    setInProgressRecipes,
     newSearch,
     categories,
     updateCategoryFilter,
