@@ -21,7 +21,7 @@ function RecipeDetails({ history, match }) {
   const [recomendations, setRecomendations] = useState([]);
   const [buttonName, setButtonName] = useState(START_RECIPE);
   const [isCoppied, setIsCoppied] = useState(false);
-  const [favoriteIcon, setFavoriteIcon] = useState('');
+  const [favoriteIcon, setFavoriteIcon] = useState(whiteHeartIcon);
   const {
     doneRecipes, inProgressRecipes, setFavoriteRecipes, favoriteRecipes,
   } = useContext(RecipeContext);
