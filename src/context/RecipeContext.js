@@ -13,17 +13,24 @@ import {
   fetchFoodsByCategory,
   fetchFoodsByFirstLetter, fetchFoodsByIngredient, fetchFoodsByName,
 } from '../services/FetchApi';
+import mockDoneRecipes from '../mocks/mockDoneRecipes';
 
 const RecipeContext = createContext();
 
 export default RecipeContext;
 
 export function RecipeProvider({ children }) {
+  /* Criando um mock para produzir o DoneRecipes */
+  if (localStorage.getItem('doneRecipes') === null) {
+    localStorage.setItem('doneRecipes', JSON.stringify(mockDoneRecipes));
+  }
+
   const history = useHistory();
   const [data, setData] = useState(false);
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [inProgressRecipes, setInProgressRecipes] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [categories, setCategories] = useState({
     foodCategories: [],
     drinkCategories: [],
@@ -146,14 +153,16 @@ export function RecipeProvider({ children }) {
     data,
     setData,
     doneRecipes,
-    favoriteRecipes,
-    inProgressRecipes,
     setDoneRecipes,
+    favoriteRecipes,
     setFavoriteRecipes,
+    inProgressRecipes,
     setInProgressRecipes,
     newSearch,
     categories,
     updateCategoryFilter,
+    filteredRecipes,
+    setFilteredRecipes,
   };
 
   return (
