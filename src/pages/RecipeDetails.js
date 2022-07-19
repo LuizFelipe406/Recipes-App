@@ -157,7 +157,7 @@ function RecipeDetails({ history, match }) {
         <img
           data-testid="favorite-btn"
           src={ favoriteIcon }
-          alt="botão de compartilhar"
+          alt="botão de favoritar"
         />
       </button>
       <h3 data-testid="recipe-category">
