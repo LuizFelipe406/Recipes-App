@@ -15,6 +15,7 @@ const copy = require('clipboard-copy');
 function RecipeDetails({ history, match }) {
   const START_RECIPE = 'Start Recipe';
   const { location: { pathname } } = history;
+  console.log(pathname);
   const { params: { id } } = match;
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);

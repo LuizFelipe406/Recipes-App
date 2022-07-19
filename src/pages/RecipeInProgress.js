@@ -6,7 +6,7 @@ import DrinkInProgress from '../components/DrinkInProgress';
 
 function RecipeInProgress(props) {
   const { match } = props;
-  const { params, path } = match;
+  const { params, path, url } = match;
   const { id } = params;
 
   const [recipe, setRecipe] = useState([]);
@@ -27,14 +27,27 @@ function RecipeInProgress(props) {
     }
   }, [id, path]);
 
+  const getUrlToCopy = () => {
+    if (path.includes('foods')) {
+      const urlToCopy = url.slice(0, +'12');
+
+      return urlToCopy;
+    }
+
+    const urlToCopy = url.slice(0, +'14');
+    console.log(urlToCopy);
+
+    return urlToCopy;
+  };
+
   return (
     <div>
       <h3>Receitas em progresso</h3>
       <div>
         {
           path.includes('foods')
-            ? <FoodInProgress recipe={ recipe } />
-            : <DrinkInProgress recipe={ recipe } />
+            ? <FoodInProgress recipe={ recipe } path={ getUrlToCopy() } id={ id } />
+            : <DrinkInProgress recipe={ recipe } path={ getUrlToCopy() } id={ id } />
         }
       </div>
     </div>
