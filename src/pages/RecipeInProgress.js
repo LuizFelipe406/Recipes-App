@@ -5,7 +5,7 @@ import FoodInProgress from '../components/FoodsInProgress';
 import DrinkInProgress from '../components/DrinkInProgress';
 
 function RecipeInProgress(props) {
-  const { match } = props;
+  const { match, history } = props;
   const { params, path, url } = match;
   const { id } = params;
 
@@ -29,13 +29,14 @@ function RecipeInProgress(props) {
 
   const getUrlToCopy = () => {
     if (path.includes('foods')) {
-      const urlToCopy = url.slice(0, +'12');
+      const urlFoods = url.slice(0, +'7');
+      const urlToCopy = `${urlFoods}${id}`;
 
       return urlToCopy;
     }
 
-    const urlToCopy = url.slice(0, +'14');
-    console.log(urlToCopy);
+    const urlDrinks = url.slice(0, +'8');
+    const urlToCopy = `${urlDrinks}${id}`;
 
     return urlToCopy;
   };
@@ -46,8 +47,22 @@ function RecipeInProgress(props) {
       <div>
         {
           path.includes('foods')
-            ? <FoodInProgress recipe={ recipe } path={ getUrlToCopy() } id={ id } />
-            : <DrinkInProgress recipe={ recipe } path={ getUrlToCopy() } id={ id } />
+            ? (
+              <FoodInProgress
+                recipe={ recipe }
+                path={ getUrlToCopy() }
+                id={ id }
+                history={ history }
+              />
+            )
+            : (
+              <DrinkInProgress
+                recipe={ recipe }
+                path={ getUrlToCopy() }
+                id={ id }
+                history={ history }
+              />
+            )
         }
       </div>
     </div>
@@ -55,6 +70,7 @@ function RecipeInProgress(props) {
 }
 
 RecipeInProgress.propTypes = {
+  history: PropTypes.shape().isRequired,
   match: PropTypes.shape().isRequired,
 };
 
