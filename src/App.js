@@ -10,7 +10,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import Recipes from './pages/Recipes';
 import Login from './pages/Login';
 import { RecipeProvider } from './context/RecipeContext';
-import 'react-toastify/dist/ReactToastify.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
         <Route path="/drinks/:id" component={ RecipeDetails } />
         <Route path="/profile" component={ Profile } />
         <Route path="/done-recipes" component={ DoneRecipes } />
-        <Route path="favorite-recipes" component={ FavoriteRecipes } />
+        <Route path="/favorite-recipes" component={ FavoriteRecipes } />
         <Route path="/foods" component={ Recipes } />
         <Route path="/drinks" component={ Recipes } />
         <Route path="/" component={ Login } />
