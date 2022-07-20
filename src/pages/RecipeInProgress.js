@@ -5,7 +5,7 @@ import FoodInProgress from '../components/FoodsInProgress';
 import DrinkInProgress from '../components/DrinkInProgress';
 
 function RecipeInProgress(props) {
-  const { match } = props;
+  const { match, history } = props;
   const { params, path, url } = match;
   const { id } = params;
 
@@ -46,8 +46,22 @@ function RecipeInProgress(props) {
       <div>
         {
           path.includes('foods')
-            ? <FoodInProgress recipe={ recipe } path={ getUrlToCopy() } id={ id } />
-            : <DrinkInProgress recipe={ recipe } path={ getUrlToCopy() } id={ id } />
+            ? (
+              <FoodInProgress
+                recipe={ recipe }
+                path={ getUrlToCopy() }
+                id={ id }
+                history={ history }
+              />
+            )
+            : (
+              <DrinkInProgress
+                recipe={ recipe }
+                path={ getUrlToCopy() }
+                id={ id }
+                history={ history }
+              />
+            )
         }
       </div>
     </div>
@@ -55,6 +69,7 @@ function RecipeInProgress(props) {
 }
 
 RecipeInProgress.propTypes = {
+  history: PropTypes.shape().isRequired,
   match: PropTypes.shape().isRequired,
 };
 

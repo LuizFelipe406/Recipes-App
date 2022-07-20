@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './CheckboxIngredient.css';
-import { Link } from 'react-router-dom';
 
 function CheckboxIngredient(props) {
-  const { ingredients } = props;
+  const { ingredients, history } = props;
 
   const [isChecked, setIsChecked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -38,7 +37,7 @@ function CheckboxIngredient(props) {
   };
 
   const finishRecipe = () => {
-    <Link to="/done-recipes" />;
+    history.push('/done-recipes');
   };
 
   return (
@@ -77,6 +76,7 @@ function CheckboxIngredient(props) {
 
 CheckboxIngredient.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+  history: PropTypes.shape().isRequired,
 };
 
 export default CheckboxIngredient;
