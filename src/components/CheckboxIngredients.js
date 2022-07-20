@@ -22,19 +22,21 @@ function CheckboxIngredient(props) {
   }, [ingredientsMarked, ingredients]);
 
   const handleChange = ({ target }) => {
-    const { checked, id } = target;
+    const { checked, value } = target;
+    let selectdIngredients = [...ingredientsMarked];
     setIsChecked(checked);
 
     if (checked === true) {
-      setIngredientesMarked((prev) => [...prev, id]);
+      selectdIngredients = [...selectdIngredients, value];
     } else {
-      ingredients.forEach((ingr) => {
-        if (ingredientsMarked.includes(ingr)) {
-          setIngredientesMarked(ingredientsMarked.filter((ig) => ig !== ingr));
-        }
-      });
+      selectdIngredients.splice(ingredientsMarked.indexOf(value), 1);
     }
+
+    setIngredientesMarked(selectdIngredients);
   };
+
+  const scratchIngredient = (ingredient) => (
+    ingredientsMarked.includes(ingredient) ? 'line-through' : 'normal');
 
   const finishRecipe = () => {
     history.push('/done-recipes');
@@ -42,17 +44,19 @@ function CheckboxIngredient(props) {
 
   return (
     <div>
+      { console.log(ingredientsMarked) }
       {
         ingredients.map((ingredient, i) => (
           <label
             htmlFor={ ingredient }
             key={ ingredient }
-            className={ isChecked ? 'line-through' : 'normal' }
+            className={ scratchIngredient(ingredient) }
             data-testid={ `${i}-ingredient-step` }
           >
             <input
               type="checkbox"
               id={ ingredient }
+              value={ ingredient }
               checked={ isChecked[i] }
               onChange={ handleChange }
             />
