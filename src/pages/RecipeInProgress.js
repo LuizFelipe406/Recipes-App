@@ -29,13 +29,14 @@ function RecipeInProgress(props) {
 
   const getUrlToCopy = () => {
     if (path.includes('foods')) {
-      const urlToCopy = url.slice(0, +'12');
+      const urlFoods = url.slice(0, +'7');
+      const urlToCopy = `${urlFoods}${id}`;
 
       return urlToCopy;
     }
 
-    const urlToCopy = url.slice(0, +'14');
-    console.log(urlToCopy);
+    const urlDrinks = url.slice(0, +'8');
+    const urlToCopy = `${urlDrinks}${id}`;
 
     return urlToCopy;
   };
