@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './CheckboxIngredient.css';
+import { saveIngredients } from '../services/localStorage';
 
 function CheckboxIngredient(props) {
   const { ingredients, history } = props;
+  const teste = JSON.parse(localStorage.getItem('inProgressFoods'));
 
   const [isChecked, setIsChecked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -33,6 +35,7 @@ function CheckboxIngredient(props) {
     }
 
     setIngredientesMarked(selectdIngredients);
+    saveIngredients(JSON.stringify(selectdIngredients));
   };
 
   const scratchIngredient = (ingredient) => (
@@ -44,7 +47,6 @@ function CheckboxIngredient(props) {
 
   return (
     <div>
-      { console.log(ingredientsMarked) }
       {
         ingredients.map((ingredient, i) => (
           <label
@@ -57,7 +59,7 @@ function CheckboxIngredient(props) {
               type="checkbox"
               id={ ingredient }
               value={ ingredient }
-              checked={ isChecked[i] }
+              checked={ teste && teste.includes(ingredient) ? true : isChecked[i] }
               onChange={ handleChange }
             />
             { ingredient }

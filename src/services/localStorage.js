@@ -4,6 +4,10 @@ export const saveLocalStorage = (userEmail) => {
   localStorage.setItem('cocktailsToken', 1);
 };
 
+export const saveIngredients = (ingredients) => {
+  localStorage.setItem('inProgressFoods', ingredients);
+};
+
 export const cleanLocalStorage = () => {
   localStorage.removeItem('user');
   localStorage.removeItem('mealsToken');
