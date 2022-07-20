@@ -121,12 +121,6 @@ function FoodInProgress(props) {
           <p data-testid="recipe-category">{ strCategory }</p>
           <CheckboxIngredient ingredients={ getIngredients() } />
           <p data-testid="instructions">{ strInstructions }</p>
-          <button
-            type="button"
-            data-testid="finish-recipe-btn"
-          >
-            Finalizar Receita
-          </button>
         </div>
       );
     })
