@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './CheckboxIngredient.css';
-import { Link } from 'react-router-dom';
+import { saveIngredients } from '../services/localStorage';
 
 function CheckboxIngredient(props) {
-  const { ingredients } = props;
+  const { ingredients, history } = props;
+  const teste = JSON.parse(localStorage.getItem('inProgressFoods'));
 
   const [isChecked, setIsChecked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -23,22 +24,25 @@ function CheckboxIngredient(props) {
   }, [ingredientsMarked, ingredients]);
 
   const handleChange = ({ target }) => {
-    const { checked, id } = target;
+    const { checked, value } = target;
+    let selectdIngredients = [...ingredientsMarked];
     setIsChecked(checked);
 
     if (checked === true) {
-      setIngredientesMarked((prev) => [...prev, id]);
+      selectdIngredients = [...selectdIngredients, value];
     } else {
-      ingredients.forEach((ingr) => {
-        if (ingredientsMarked.includes(ingr)) {
-          setIngredientesMarked(ingredientsMarked.filter((ig) => ig !== ingr));
-        }
-      });
+      selectdIngredients.splice(ingredientsMarked.indexOf(value), 1);
     }
+
+    setIngredientesMarked(selectdIngredients);
+    saveIngredients(JSON.stringify(selectdIngredients));
   };
 
+  const scratchIngredient = (ingredient) => (
+    ingredientsMarked.includes(ingredient) ? 'line-through' : 'normal');
+
   const finishRecipe = () => {
-    <Link to="/done-recipes" />;
+    history.push('/done-recipes');
   };
 
   return (
@@ -48,13 +52,14 @@ function CheckboxIngredient(props) {
           <label
             htmlFor={ ingredient }
             key={ ingredient }
-            className={ isChecked ? 'line-through' : 'normal' }
+            className={ scratchIngredient(ingredient) }
             data-testid={ `${i}-ingredient-step` }
           >
             <input
               type="checkbox"
               id={ ingredient }
-              checked={ isChecked[i] }
+              value={ ingredient }
+              checked={ teste && teste.includes(ingredient) ? true : isChecked[i] }
               onChange={ handleChange }
             />
             { ingredient }
@@ -77,6 +82,7 @@ function CheckboxIngredient(props) {
 
 CheckboxIngredient.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+  history: PropTypes.shape().isRequired,
 };
 
 export default CheckboxIngredient;

@@ -9,7 +9,7 @@ import { fetchDrinkById, fetchFoodById } from '../services/FetchApi';
 const copy = require('clipboard-copy');
 
 function FoodInProgress(props) {
-  const { recipe, path, id } = props;
+  const { recipe, path, id, history } = props;
   const ingredients = [];
 
   const [isCoppied, setIsCoppied] = useState(false);
@@ -119,7 +119,7 @@ function FoodInProgress(props) {
             />
           </button>
           <p data-testid="recipe-category">{ strCategory }</p>
-          <CheckboxIngredient ingredients={ getIngredients() } />
+          <CheckboxIngredient ingredients={ getIngredients() } history={ history } />
           <p data-testid="instructions">{ strInstructions }</p>
         </div>
       );
