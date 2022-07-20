@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
@@ -25,6 +26,7 @@ function Header({ pathname }) {
 
   const searchIconElement = (
     <button
+      style={ { border: 'none' } }
       type="button"
       onClick={ changeSearchBar }
     >
@@ -37,8 +39,8 @@ function Header({ pathname }) {
   );
 
   return (
-    <div>
-      <header>
+    <Container>
+      <header className="d-flex justify-content-between align-items-center">
         <Link to="/profile">
           <img
             src={ profileIcon }
@@ -46,7 +48,7 @@ function Header({ pathname }) {
             data-testid="profile-top-btn"
           />
         </Link>
-        <span data-testid="page-title">{ title }</span>
+        <span className="fs-1 fw-semibold" data-testid="page-title">{ title }</span>
         {
           (pathname === '/foods' || pathname === '/drinks') && searchIconElement
         }
@@ -54,7 +56,7 @@ function Header({ pathname }) {
       {
         showSearchBar && <SearchBar pathname={ pathname } />
       }
-    </div>
+    </Container>
   );
 }
 
