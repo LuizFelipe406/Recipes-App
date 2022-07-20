@@ -48,7 +48,7 @@ function DoneRecipes({ history: { location: { pathname } } }) {
   return (
     <div>
       <Header pathname={ pathname } />
-      <DoneFavFilter />
+      <DoneFavFilter pathname={ pathname } />
       <div>
         { filteredRecipes.map(createRecipeCards) }
       </div>
