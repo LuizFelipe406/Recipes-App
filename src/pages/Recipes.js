@@ -25,50 +25,60 @@ function Recipes({ history: { location: { pathname } } }) {
   }, [pathname, setData]);
 
   return (
-    <Container fluid>
+    <Container
+      fluid
+      className="p-0 m-0"
+      style={ { transition: '0.3s ease-in' } }
+    >
       <Header pathname={ pathname } />
       <CategoryFilters pathname={ pathname } />
-      <Container fluid>
-        <Row xs={ 2 } md={ 4 } className="g-4 p-0 m-0">
-          {
-            data && data.map((item, index) => (
-              <Col key={ index }>
-                <Link
-                  to={
-                    pathname === '/foods'
-                      ? `/foods/${item.idMeal}` : `/drinks/${item.idDrink}`
-                  }
+      <Row
+        style={ { transition: '0.3s ease-in' } }
+        xs={ 2 }
+        md={ 4 }
+        className="g-4 p-0 m-0 mx-2"
+      >
+        {
+          data && data.map((item, index) => (
+            <Col key={ index } className="p-2 m-0">
+              <Link
+                className="p-0 m-0"
+                to={
+                  pathname === '/foods'
+                    ? `/foods/${item.idMeal}` : `/drinks/${item.idDrink}`
+                }
+              >
+                <Card
+                  border="secondary"
+                  className="text-center"
+                  style={ { width: '10rem' } }
+                  data-testid={ `${index}-recipe-card` }
                 >
-                  <Card
-                    border="secondary"
-                    className="text-center"
-                    style={ { width: '8rem' } }
-                    data-testid={ `${index}-recipe-card` }
+                  <Card.Img
+                    className="img-fluid"
+                    src={ pathname === '/foods'
+                      ? item.strMealThumb : item.strDrinkThumb }
+                    alt={ pathname === '/foods' ? item.strMeal : item.strDrink }
+                    data-testid={ `${index}-card-img` }
+                  />
+                  <Card.ImgOverlay
+                    className="d-flex justify-content-center align-items-center"
+                    style={ { backgroundColor: 'rgba(33, 37, 41, 0.5)' } }
                   >
-                    <Card.Img
-                      className="img-fluid"
-                      // style={ { height: '6rem' } }
-                      variant="bottom"
-                      src={ pathname === '/foods'
-                        ? item.strMealThumb : item.strDrinkThumb }
-                      alt={ pathname === '/foods' ? item.strMeal : item.strDrink }
-                      data-testid={ `${index}-card-img` }
-                    />
-                    <Card.Body className="p-2">
-                      <Card.Title
-                        className="m-0 text-dark"
-                        data-testid={ `${index}-card-name` }
-                      >
-                        { pathname === '/foods' ? item.strMeal : item.strDrink }
-                      </Card.Title>
-                    </Card.Body>
-                  </Card>
-                </Link>
-              </Col>
-            ))
-          }
-        </Row>
-      </Container>
+                    <Card.Title
+                      className="m-0 text-white fs-1"
+                      style={ { opacity: '1', fontFamily: 'Titan One' } }
+                      data-testid={ `${index}-card-name` }
+                    >
+                      { pathname === '/foods' ? item.strMeal : item.strDrink }
+                    </Card.Title>
+                  </Card.ImgOverlay>
+                </Card>
+              </Link>
+            </Col>
+          ))
+        }
+      </Row>
       <Footer />
     </Container>
   );

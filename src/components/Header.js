@@ -26,7 +26,8 @@ function Header({ pathname }) {
 
   const searchIconElement = (
     <button
-      style={ { border: 'none' } }
+      className="mr-3 p-0 m-0"
+      style={ { border: 'none', backgroundColor: 'transparent' } }
       type="button"
       onClick={ changeSearchBar }
     >
@@ -39,23 +40,34 @@ function Header({ pathname }) {
   );
 
   return (
-    <Container>
-      <header className="d-flex justify-content-between align-items-center">
+    <Container className="p-0 m-0">
+      <header
+        style={ { zIndex: '2', position: 'absolute', width: '100%', top: '0' } }
+        className="d-flex justify-content-between align-items-center text-bg-success py-2"
+      >
         <Link to="/profile">
           <img
+            className="ml-4 p-0"
             src={ profileIcon }
             alt="icone de perfil"
             data-testid="profile-top-btn"
           />
         </Link>
-        <span className="fs-1 fw-semibold" data-testid="page-title">{ title }</span>
+        <span
+          style={ { fontFamily: 'Titan One', fontSize: '2em' } }
+          data-testid="page-title"
+        >
+          { title }
+        </span>
         {
           (pathname === '/foods' || pathname === '/drinks') && searchIconElement
         }
       </header>
-      {
-        showSearchBar && <SearchBar pathname={ pathname } />
-      }
+      <SearchBar
+        showSearchBar={ showSearchBar }
+        pathname={ pathname }
+      />
+
     </Container>
   );
 }
