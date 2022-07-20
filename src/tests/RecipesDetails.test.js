@@ -158,7 +158,8 @@ describe('Testa botão de copiar link', () => {
     //fireEvent.click(screen.getByTestId('share-btn'))
     userEvent.click(shareBtn)
     expect(await screen.findByText('Link copied!'))
-
+    expect
+    const link = userEvent.paste(shareBtn,  )
   });
 });
 
@@ -175,6 +176,11 @@ describe('Testa botão de favoritar', () => {
 
     const favBtn = screen.getByAltText('botão de favoritar');
     expect(localStorage.getItem('favoriteRecipes')).toBeNull();
+
+    expect(favBtn).toHaveAttribute('src', 'whiteHeartIcon.svg' );
+    userEvent.click(favBtn);
+    expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg' );
+    userEvent.click(favBtn);
 
     expect(favBtn).toHaveAttribute('src', 'whiteHeartIcon.svg' );
     userEvent.click(favBtn);
@@ -199,4 +205,5 @@ describe('Testa botão de favoritar', () => {
 });
 
   });
+
 });
