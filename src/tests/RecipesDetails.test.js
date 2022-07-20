@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { within, screen, waitFor } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 import userEvent from '@testing-library/user-event';
@@ -142,6 +142,8 @@ describe('Testa CategoryFilters drinks', () => {
 
     userEvent.click(startRecipe)
     expect(history.location.pathname).toBe('/drinks/15997/in-progress');
+    screen.getByText('Receitas em progresso')
+    expect(startRecipe).not.toBeInTheDocument()
 
   });
 });
@@ -158,8 +160,8 @@ describe('Testa botão de copiar link', () => {
     //fireEvent.click(screen.getByTestId('share-btn'))
     userEvent.click(shareBtn)
     expect(await screen.findByText('Link copied!'))
-    expect
-    const link = userEvent.paste(shareBtn,  )
+
+
   });
 });
 
@@ -190,7 +192,7 @@ describe('Testa botão de favoritar', () => {
     const response = localStorage.getItem('favoriteRecipes');
   
     const obj = JSON.parse(response)[0];
-
+      
     expect(obj.name).toEqual('Corba');
 
     expect(obj).toEqual(
@@ -206,4 +208,26 @@ describe('Testa botão de favoritar', () => {
 
   });
 
+describe('Testa botão de favoritar', () => {
+  test('Testa favoritos', async () => {
+
+    const { history } = renderWithRouter(<App />);
+        const inProgressRecipes = {
+          meals: {
+            52977: [],
+          },
+        };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    history.push('/foods/52977');
+    await waitFor(() => screen.getByRole('heading', {
+    name: /corba/i}), {timeout: 5000})
+     
+    const meals = localStorage.getItem('inProgressRecipes')
+
+    const startRecipe = await screen.findByTestId('start-recipe-btn')
+    within(startRecipe).getByText(/Continue Recipe/i)
+
+    }); 
+  });
 });
+
