@@ -1,15 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import RecipeContext from '../context/RecipeContext';
 import './CheckboxIngredient.css';
 import { saveIngredients } from '../services/localStorage';
 
 function CheckboxIngredient(props) {
-  const { ingredients, history } = props;
-  const teste = JSON.parse(localStorage.getItem('inProgressFoods'));
+  const { ingredients, history, path, id } = props;
+  // const teste = JSON.parse(localStorage.getItem('inProgressFoods'));
 
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [ingredientsMarked, setIngredientesMarked] = useState([]);
+
+  const { inProgressRecipes, setInProgressRecipes } = useContext(RecipeContext);
+
+  useEffect(() => {
+    if (path.includes('/foods') && Object.keys(inProgressRecipes.meals).includes(id)) {
+      setIngredientesMarked(inProgressRecipes.meals[id]);
+    } if (path.includes('/drinks') && Object.keys(inProgressRecipes
+      .cocktails).includes(id)) {
+      setIngredientesMarked(inProgressRecipes.cocktails[id]);
+    }
+  }, [id, inProgressRecipes, path]);
 
   useEffect(() => {
     const enabledButton = () => {
@@ -25,17 +37,39 @@ function CheckboxIngredient(props) {
 
   const handleChange = ({ target }) => {
     const { checked, value } = target;
-    let selectdIngredients = [...ingredientsMarked];
-    setIsChecked(checked);
+    let selectdIngredients = [];
+    // setIsChecked(checked);
 
     if (checked === true) {
-      selectdIngredients = [...selectdIngredients, value];
+      selectdIngredients = [...ingredientsMarked, value];
     } else {
-      selectdIngredients.splice(ingredientsMarked.indexOf(value), 1);
+      selectdIngredients = ingredientsMarked
+        .filter((item) => (item !== value));
+    }
+    let newInProgress = {};
+    if (path.includes('/foods')) {
+      setInProgressRecipes((oldState) => {
+        newInProgress = { ...oldState,
+          meals: {
+            ...oldState.meals,
+            [id]: selectdIngredients,
+          },
+        };
+        return newInProgress;
+      });
+    } else {
+      setInProgressRecipes((oldState) => {
+        newInProgress = { ...oldState,
+          cocktails: {
+            ...oldState.cocktails,
+            [id]: selectdIngredients,
+          },
+        };
+        return newInProgress;
+      });
     }
 
-    setIngredientesMarked(selectdIngredients);
-    saveIngredients(JSON.stringify(selectdIngredients));
+    saveIngredients(JSON.stringify(newInProgress));
   };
 
   const scratchIngredient = (ingredient) => (
@@ -59,7 +93,8 @@ function CheckboxIngredient(props) {
               type="checkbox"
               id={ ingredient }
               value={ ingredient }
-              checked={ teste && teste.includes(ingredient) ? true : isChecked[i] }
+              checked={ !!ingredientsMarked
+                .includes(ingredient) }
               onChange={ handleChange }
             />
             { ingredient }
@@ -83,6 +118,8 @@ function CheckboxIngredient(props) {
 CheckboxIngredient.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
   history: PropTypes.shape().isRequired,
+  path: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default CheckboxIngredient;

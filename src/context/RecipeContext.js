@@ -45,7 +45,10 @@ export function RecipeProvider({ children }) {
     || JSON.stringify([]);
     setFavoriteRecipes(JSON.parse(storageFavoriteRecipes));
     const storageInProgressRecipes = localStorage.getItem('inProgressRecipes')
-    || JSON.stringify([]);
+    || JSON.stringify({
+      meals: [],
+      cocktails: [],
+    });
     setInProgressRecipes(JSON.parse(storageInProgressRecipes));
   }, []);
 

@@ -208,26 +208,35 @@ describe('Testa botão de favoritar', () => {
 
   });
 
-describe('Testa botão de favoritar', () => {
-  test('Testa favoritos', async () => {
+// describe('Testa botão de favoritar', () => {
+//   test('Testa favoritos', async () => {
 
-    const { history } = renderWithRouter(<App />);
-        const inProgressRecipes = {
-          meals: {
-            52977: [],
-          },
-        };
-    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-    history.push('/foods/52977');
-    await waitFor(() => screen.getByRole('heading', {
-    name: /corba/i}), {timeout: 5000})
+//     const { history } = renderWithRouter(<App />);
+//     //     const inProgressRecipes = {
+//     //       meals: {
+//     //         52977: [],
+//     //       },
+//     //     };
+//     // localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+//     history.push('/foods/52977');
+//     await waitFor(() => screen.getByRole('heading', {
+//     name: /corba/i}), {timeout: 5000})
      
-    const meals = localStorage.getItem('inProgressRecipes')
+//     // const meals = localStorage.getItem('inProgressRecipes')
 
-    const startRecipe = await screen.findByTestId('start-recipe-btn')
-    within(startRecipe).getByText(/Continue Recipe/i)
+//     const startRecipe = await screen.findByTestId('start-recipe-btn')
+//     userEvent.click(startRecipe)
+//     await waitFor(() => screen.getByText(/corba/i), {timeout: 5000})
+    
+//     const ingBtn = screen.getByRole('checkbox', { name: /tomato puree/i })
+//     userEvent.click(ingBtn)
+    
+//     history.goBack()
+//     await waitFor(() => screen.getByText(/corba/i), {timeout: 5000})
 
-    }); 
-  });
+//     within(startRecipe).getByText(/Continue Recipe/i)
+
+//     }); 
+//  });
 });
 
