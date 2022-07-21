@@ -3,7 +3,7 @@ import mealIcon from '../images/mealIcon.svg';
 
 const mockDoneRecipes = [
   {
-    id: 357852,
+    id: '357852',
     type: 'drink',
     nationality: 'Colombiana',
     category: '',
@@ -17,7 +17,7 @@ const mockDoneRecipes = [
     ],
   },
   {
-    id: 194862,
+    id: '194862',
     type: 'food',
     nationality: 'Sueca',
     category: 'Lanche',
@@ -31,7 +31,7 @@ const mockDoneRecipes = [
     ],
   },
   {
-    id: 648354,
+    id: '648354',
     type: 'drink',
     nationality: 'Iraniana',
     category: '',
@@ -45,7 +45,7 @@ const mockDoneRecipes = [
     ],
   },
   {
-    id: 375884,
+    id: '375884',
     type: 'food',
     nationality: 'Malauiana',
     category: 'Salad',

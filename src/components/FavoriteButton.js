@@ -8,7 +8,7 @@ function FavoriteButton({ recipe: { id, name }, index }) {
 
   const unfavoriteClick = ({ target: { value } }) => {
     const newFavorites = favoriteRecipes.filter(
-      (recipe) => recipe.id !== parseInt(value, 10),
+      (recipe) => recipe.id !== value,
     );
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
     setFavoriteRecipes(newFavorites);
