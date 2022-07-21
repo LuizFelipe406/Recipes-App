@@ -53,7 +53,7 @@ function CheckboxIngredient(props) {
       alcoholicOrNot: (path.includes('/foods') ? '' : recipe.strAlcoholic),
       name: (path.includes('/foods') ? recipe.strMeal : recipe.strDrink),
       image: (path.includes('/foods') ? recipe.strMealThumb : recipe.strDrinkThumb),
-      tags: (path.includes('/foods') ? recipe.strTags.split(', ') : []),
+      tags: (typeof recipe.strTags === 'string' ? recipe.strTags.split(', ') : []),
       doneDate: 'PLACEHOLDER',
     };
     doneRecipes.push(doneObject);
