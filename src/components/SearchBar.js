@@ -3,28 +3,17 @@ import PropTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
 import RecipeContext from '../context/RecipeContext';
 
-const hideStyle = {
-  zIndex: '1',
-  width: '100%',
-  position: 'absolute',
-  transform: 'translateY(-200%)',
-  transition: ' transform 0.3s ease-in',
-  backgroundColor: 'rgba(108, 117, 125)',
-  borderRadius: '0 0 5px 5px',
-};
 const showStyle = {
   zIndex: '1',
   width: '100%',
   position: 'absolute',
   margin: 'auto 0',
-  backgroundColor: 'rgba(108, 117, 125)',
-  transform: 'translateY(0)',
-  transition: ' transform 0.3s ease-in',
+  backgroundColor: '#dee2e6',
   borderRadius: '0 0 5px 5px',
 };
 const FONT_FAMILY = 'Source Sans Pro';
 
-function SearchBar({ pathname, showSearchBar }) {
+function SearchBar({ pathname }) {
   const { newSearch } = useContext(RecipeContext);
   const [filter, setFilter] = useState({
     option: '',
@@ -56,7 +45,7 @@ function SearchBar({ pathname, showSearchBar }) {
 
   return (
     <Form
-      style={ showSearchBar ? showStyle : hideStyle }
+      style={ showStyle }
     >
       <Form.Group
         className="d-flex flex-column justify-content-center align-items-center"
@@ -73,7 +62,7 @@ function SearchBar({ pathname, showSearchBar }) {
         <Form.Group className="mx-auto d-flex justify-content-center align-items-center">
           <Form.Check
             style={ { fontFamily: FONT_FAMILY, fontWeight: '600', fontSize: '1.1em' } }
-            className="text-white"
+            className="text-black"
             inline
             id="ingredient"
             type="radio"
@@ -86,7 +75,7 @@ function SearchBar({ pathname, showSearchBar }) {
           />
           <Form.Check
             style={ { fontFamily: FONT_FAMILY, fontWeight: '600', fontSize: '1.1em' } }
-            className="text-white"
+            className="text-black"
             inline
             id="name"
             type="radio"
@@ -98,7 +87,7 @@ function SearchBar({ pathname, showSearchBar }) {
           />
           <Form.Check
             style={ { fontFamily: FONT_FAMILY, fontWeight: '600', fontSize: '1.1em' } }
-            className="text-white"
+            className="text-black"
             inline
             id="first-letter"
             type="radio"
@@ -127,7 +116,6 @@ function SearchBar({ pathname, showSearchBar }) {
 
 SearchBar.propTypes = {
   pathname: PropTypes.string.isRequired,
-  showSearchBar: PropTypes.bool.isRequired,
 };
 
 export default SearchBar;

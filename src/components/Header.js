@@ -42,7 +42,6 @@ function Header({ pathname }) {
   return (
     <Container className="p-0 m-0">
       <header
-        style={ { zIndex: '2', position: 'absolute', width: '100%', top: '0' } }
         className="d-flex justify-content-between align-items-center text-bg-success py-2"
       >
         <Link to="/profile">
@@ -54,6 +53,7 @@ function Header({ pathname }) {
           />
         </Link>
         <span
+          className={ pathname !== '/foods' || pathname !== '/drinks' ? 'mr-3' : '' }
           style={ { fontFamily: 'Titan One', fontSize: '2em' } }
           data-testid="page-title"
         >
@@ -63,10 +63,12 @@ function Header({ pathname }) {
           (pathname === '/foods' || pathname === '/drinks') && searchIconElement
         }
       </header>
-      <SearchBar
-        showSearchBar={ showSearchBar }
-        pathname={ pathname }
-      />
+      {
+        showSearchBar && <SearchBar
+          showSearchBar={ showSearchBar }
+          pathname={ pathname }
+        />
+      }
 
     </Container>
   );

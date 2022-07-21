@@ -27,8 +27,8 @@ function Recipes({ history: { location: { pathname } } }) {
   return (
     <Container
       fluid
-      className="p-0 m-0"
-      style={ { transition: '0.3s ease-in' } }
+      className="p-0 m-0 pb-3"
+      style={ { width: '100vw' } }
     >
       <Header pathname={ pathname } />
       <CategoryFilters pathname={ pathname } />
@@ -36,7 +36,7 @@ function Recipes({ history: { location: { pathname } } }) {
         style={ { transition: '0.3s ease-in' } }
         xs={ 2 }
         md={ 4 }
-        className="g-4 p-0 m-0 mx-2"
+        className="g-4 p-0 m-0 mx-2 mb-5"
       >
         {
           data && data.map((item, index) => (

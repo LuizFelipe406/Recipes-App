@@ -11,9 +11,15 @@ function CategoryFilters({ pathname }) {
 
   const buttonCreator = (item, index) => (
     <Button
-      style={ { fontFamily: FONT_FAMILY, fontWeight: '600', fontSize: '1.1em' } }
+      style={ {
+        fontFamily: FONT_FAMILY,
+        fontWeight: '600',
+        overflowX: 'hidden',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+      } }
       variant="outline-success"
-      className="fs-6 flex-grow-1"
+      className="fs-6 flex-grow-1 btn-sm"
       type="button"
       key={ index }
       data-testid={ `${item.strCategory}-category-filter` }
@@ -27,15 +33,14 @@ function CategoryFilters({ pathname }) {
     <Container
       fluid
       className="p-0"
-      style={ { transition: '0.3s ease-in', marginTop: '64px' } }
     >
-      <ButtonToolbar className="mb-1" style={ { width: '100%' } }>
-        <ButtonGroup size="sm" className="d-flex" style={ { width: '100%' } }>
+      <ButtonToolbar className="mb-1" style={ { width: '100vw' } }>
+        <ButtonGroup className="d-flex" style={ { width: '100vw' } }>
           <Button
             style={ {
               fontFamily: FONT_FAMILY, fontWeight: '600', fontSize: '1.1em' } }
             variant="outline-success"
-            className="fs-6 flex-grow-1"
+            className="fs-6 flex-grow-1 btn-sm"
             type="button"
             data-testid="All-category-filter"
             onClick={ () => updateCategoryFilter('All', pathname) }
