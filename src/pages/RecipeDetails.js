@@ -143,23 +143,22 @@ function RecipeDetails({ history, match }) {
       {
         isCoppied && <span>Link copied!</span>
       }
-      <button
-        type="button"
-        data-testid="share-btn"
+      <input
+        type="image"
+        alt={ `Compartilhar receita de ${pathname.includes('/foods')
+          ? recipe.strMeal : recipe.strDrink}` }
+        src={ shareIcon }
         onClick={ copyToClipBoard }
-      >
-        <img src={ shareIcon } alt="botão de compartilhar" />
-      </button>
-      <button
-        type="button"
+        data-testid="share-btn"
+      />
+      <input
+        type="image"
+        alt={ `Desfavoritar receita de ${pathname.includes('/foods')
+          ? recipe.strMeal : recipe.strDrink}` }
+        src={ favoriteIcon }
         onClick={ saveFavoriteRecipe }
-      >
-        <img
-          data-testid="favorite-btn"
-          src={ favoriteIcon }
-          alt="botão de favoritar"
-        />
-      </button>
+        data-testid="favorite-btn"
+      />
       <h3 data-testid="recipe-category">
         { pathname.includes('/foods') ? recipe.strCategory : recipe.strAlcoholic }
       </h3>

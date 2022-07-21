@@ -101,23 +101,22 @@ function DrinkInProgress(props) {
           {
             isCoppied && <span>Link copied!</span>
           }
-          <button
-            type="button"
-            data-testid="share-btn"
+          <input
+            type="image"
+            alt={ `Compartilhar receita de ${path.includes('/foods')
+              ? recipe.strMeal : recipe.strDrink}` }
+            src={ shareIcon }
             onClick={ copyToClipBoard }
-          >
-            <img src={ shareIcon } alt="botão de compartilhar" />
-          </button>
-          <button
-            type="button"
+            data-testid="share-btn"
+          />
+          <input
+            type="image"
+            alt={ `Desfavoritar receita de ${path.includes('/foods')
+              ? recipe.strMeal : recipe.strDrink}` }
+            src={ favoriteIcon }
             onClick={ saveFavoriteRecipe }
-          >
-            <img
-              data-testid="favorite-btn"
-              src={ favoriteIcon }
-              alt="botão de favoritar"
-            />
-          </button>
+            data-testid="favorite-btn"
+          />
           <p data-testid="recipe-category">{ strAlcoholic }</p>
           <CheckboxIngredient ingredients={ getIngredients() } history={ history } />
           <p data-testid="instructions">{ strInstructions }</p>
