@@ -25,7 +25,6 @@ function Recipes({ history: { location: { pathname } } }) {
   return (
     <div>
       <Header pathname={ pathname } />
-      pagina de Recipes
       <CategoryFilters pathname={ pathname } />
       {
         data && data.map((item, index) => (
