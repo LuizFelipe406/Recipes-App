@@ -1,7 +1,7 @@
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 
-const mockDoneRecipes = [
+const mockFavoriteRecipes = [
   {
     id: '357852',
     type: 'drink',
@@ -45,13 +45,13 @@ const mockDoneRecipes = [
     ],
   },
   {
-    id: '375884',
-    type: 'food',
+    id: '789423',
+    type: 'drink',
     nationality: 'Malauiana',
-    category: 'Salad',
-    alcoholicOrNot: '',
-    name: 'Kachumbari',
-    image: mealIcon,
+    category: '',
+    alcoholicOrNot: 'Non-Alcoholic',
+    name: 'Kachumbari-Liquid',
+    image: drinkIcon,
     doneDate: '07/10/1997',
     tags: [
       'Simple',
@@ -60,4 +60,4 @@ const mockDoneRecipes = [
   },
 ];
 
-export default mockDoneRecipes;
+export default mockFavoriteRecipes;
