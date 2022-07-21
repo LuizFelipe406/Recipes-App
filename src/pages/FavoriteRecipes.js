@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import DoneFavFilter from '../components/DoneFavFilter';
 import RecipeContext from '../context/RecipeContext';
 import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 
 function FavoriteRecipes({ history: { location: { pathname } } }) {
   const { favoriteRecipes, filteredRecipes,
@@ -24,7 +25,16 @@ function FavoriteRecipes({ history: { location: { pathname } } }) {
           height="100px"
         />
       </Link>
+      <p data-testid={ `${index}-horizontal-top-text` }>
+        {recipe.type === 'food'
+          ? `${recipe.nationality} - ${recipe.category}`
+          : `${recipe.nationality} - ${recipe.alcoholicOrNot}`}
+      </p>
+      <Link to={ `/${recipe.type}s/${recipe.id}` }>
+        <h4 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h4>
+      </Link>
       <ShareButton recipe={ recipe } index={ index } />
+      <FavoriteButton recipe={ recipe } index={ index } />
     </div>
   );
 
