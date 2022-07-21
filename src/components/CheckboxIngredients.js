@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './CheckboxIngredient.css';
 import { saveIngredients } from '../services/localStorage';
+import RecipeContext from '../context/RecipeContext';
 
 function CheckboxIngredient(props) {
-  const { ingredients, history } = props;
+  const { ingredients, history, recipe, path } = props;
   const teste = JSON.parse(localStorage.getItem('inProgressFoods'));
 
   const [isChecked, setIsChecked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [ingredientsMarked, setIngredientesMarked] = useState([]);
+
+  const { doneRecipes, setDoneRecipes } = useContext(RecipeContext);
 
   useEffect(() => {
     const enabledButton = () => {
@@ -41,7 +44,21 @@ function CheckboxIngredient(props) {
   const scratchIngredient = (ingredient) => (
     ingredientsMarked.includes(ingredient) ? 'line-through' : 'normal');
 
-  const finishRecipe = () => {
+  const finishRecipe = async () => {
+    const doneObject = {
+      id: (path.includes('/foods') ? recipe.idMeal : recipe.idDrink),
+      type: (path.includes('/foods') ? 'food' : 'drink'),
+      nationality: recipe.strArea || '',
+      category: recipe.strCategory,
+      alcoholicOrNot: (path.includes('/foods') ? '' : recipe.strAlcoholic),
+      name: (path.includes('/foods') ? recipe.strMeal : recipe.strDrink),
+      image: (path.includes('/foods') ? recipe.strMealThumb : recipe.strDrinkThumb),
+      tags: (path.includes('/foods') ? recipe.strTags.split(', ') : []),
+      doneDate: 'PLACEHOLDER',
+    };
+    doneRecipes.push(doneObject);
+    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+    await setDoneRecipes(doneRecipes);
     history.push('/done-recipes');
   };
 
@@ -83,6 +100,8 @@ function CheckboxIngredient(props) {
 CheckboxIngredient.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
   history: PropTypes.shape().isRequired,
+  recipe: PropTypes.shape().isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default CheckboxIngredient;

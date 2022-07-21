@@ -118,7 +118,12 @@ function DrinkInProgress(props) {
             data-testid="favorite-btn"
           />
           <p data-testid="recipe-category">{ strAlcoholic }</p>
-          <CheckboxIngredient ingredients={ getIngredients() } history={ history } />
+          <CheckboxIngredient
+            ingredients={ getIngredients() }
+            history={ history }
+            recipe={ rec }
+            path={ path }
+          />
           <p data-testid="instructions">{ strInstructions }</p>
         </div>
       );
