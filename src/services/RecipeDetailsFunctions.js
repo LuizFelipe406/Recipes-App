@@ -34,3 +34,7 @@ export const saveFavoriteRecipe = (
     setFavoriteRecipes(newFavoriteRecipes);
   }
 };
+
+export const returnPage = (history) => {
+  history.goBack();
+};

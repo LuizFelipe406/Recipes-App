@@ -9,11 +9,11 @@ import RecipeContext from '../context/RecipeContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import { copyToClipBoard, saveFavoriteRecipe } from '../services/RecipeDetailsFunctions';
+import {
+  copyToClipBoard, saveFavoriteRecipe, returnPage,
+} from '../services/RecipeDetailsFunctions';
 import SectionLine from '../components/SectionLine';
 import Recomendations from '../components/RecipeDetailsRecomendations';
-
-const SOURCE_FONT = 'Source Sans Pro';
 
 function RecipeDetails({ history, match }) {
   const START_RECIPE = 'Start Recipe';
@@ -101,6 +101,13 @@ function RecipeDetails({ history, match }) {
 
   return (
     <Container className="p-0 m-0" style={ { backgroundColor: '#e9ecef' } }>
+      <button
+        type="button"
+        className="text-black m-2 return-button"
+        onClick={ () => returnPage(history) }
+      >
+        {'<'}
+      </button>
       <img
         src={ pathname.includes('/foods') ? recipe.strMealThumb : recipe.strDrinkThumb }
         alt={ pathname.includes('/foods') ? recipe.strMeal : recipe.strDrink }
@@ -119,10 +126,7 @@ function RecipeDetails({ history, match }) {
             { pathname.includes('/foods') ? recipe.strMeal : recipe.strDrink }
           </h2>
           <h3
-            className="ml-3 mt-0 fs-4 pt-0"
-            style={
-              { fontFamily: SOURCE_FONT, fontWeight: '600', color: '#6c757d' }
-            }
+            className="ml-3 mt-0 fs-4 pt-0 normal-text"
             data-testid="recipe-category"
           >
             { pathname.includes('/foods') ? recipe.strCategory : recipe.strAlcoholic }
@@ -130,7 +134,7 @@ function RecipeDetails({ history, match }) {
         </div>
         <div className="mt-2">
           { isCoppied
-          && <span style={ { fontFamily: SOURCE_FONT } }>Link copied!</span> }
+          && <span style={ { fontFamily: 'Source Sans Pro' } }>Link copied!</span> }
           <button
             className="border-0"
             type="button"
@@ -167,9 +171,7 @@ function RecipeDetails({ history, match }) {
           {
             ingredients.length > 0 && ingredients.map((ingredient, index) => (
               <li
-                className="fs-5"
-                style={ {
-                  fontFamily: SOURCE_FONT, fontWeight: '600', color: '#6c757d' } }
+                className="fs-5 normal-text"
                 key={ index }
                 data-testid={ `${index}-ingredient-name-and-measure` }
               >
@@ -188,9 +190,7 @@ function RecipeDetails({ history, match }) {
           INSTRUCTIONS
         </span>
         <p
-          style={ {
-            fontFamily: SOURCE_FONT, fontWeight: '600', color: '#6c757d' } }
-          className="ml-1 mr-1 fs-5"
+          className="ml-1 mr-1 fs-5 normal-text"
           data-testid="instructions"
         >
           { recipe.strInstructions }
@@ -219,9 +219,7 @@ function RecipeDetails({ history, match }) {
           doneRecipe.id === (pathname.includes('food') ? recipe.idMeal : recipe.idDrink)
         ))) && (
           <button
-            style={ {
-              fontFamily: SOURCE_FONT, fontWeight: '600', color: '#6c757d' } }
-            className="fixed-bottom text-bg-success border-0 p-2 fs-5"
+            className="fixed-bottom text-bg-success border-0 p-2 fs-5 normal-text"
             type="button"
             data-testid="start-recipe-btn"
             onClick={ () => history.push(`${pathname}/in-progress`) }
