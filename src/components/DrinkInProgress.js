@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import CheckboxIngredient from './CheckboxIngredients';
+import CheckboxIngredients from './CheckboxIngredients';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -101,29 +101,29 @@ function DrinkInProgress(props) {
           {
             isCoppied && <span>Link copied!</span>
           }
-          <button
-            type="button"
-            data-testid="share-btn"
+          <input
+            type="image"
+            alt={ `Compartilhar receita de ${path.includes('/foods')
+              ? recipe.strMeal : recipe.strDrink}` }
+            src={ shareIcon }
             onClick={ copyToClipBoard }
-          >
-            <img src={ shareIcon } alt="botão de compartilhar" />
-          </button>
-          <button
-            type="button"
+            data-testid="share-btn"
+          />
+          <input
+            type="image"
+            alt={ `Desfavoritar receita de ${path.includes('/foods')
+              ? recipe.strMeal : recipe.strDrink}` }
+            src={ favoriteIcon }
             onClick={ saveFavoriteRecipe }
-          >
-            <img
-              data-testid="favorite-btn"
-              src={ favoriteIcon }
-              alt="botão de favoritar"
-            />
-          </button>
+            data-testid="favorite-btn"
+          />
           <p data-testid="recipe-category">{ strAlcoholic }</p>
-          <CheckboxIngredient
-            path={ path }
-            id={ id }
+          <CheckboxIngredients
             ingredients={ getIngredients() }
             history={ history }
+            recipe={ rec }
+            path={ path }
+            id={ id }
           />
           <p data-testid="instructions">{ strInstructions }</p>
         </div>

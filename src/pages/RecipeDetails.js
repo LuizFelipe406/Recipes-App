@@ -138,28 +138,26 @@ function RecipeDetails({ history, match }) {
         <div className="mt-2">
           { isCoppied
           && <span className="section-title">Link copied!</span> }
-          <button
+          <input
             className="border-0"
-            type="button"
-            data-testid="share-btn"
+            type="image"
+            alt={ `Compartilhar receita de ${pathname.includes('/foods')
+              ? recipe.strMeal : recipe.strDrink}` }
+            src={ shareIcon }
             onClick={ () => copyToClipBoard(setIsCoppied, isCoppied, pathname) }
-          >
-            <img src={ shareIcon } alt="botão de compartilhar" />
-          </button>
-          <button
+            data-testid="share-btn"
+          />
+          <input
             className="border-0"
-            type="button"
+            type="image"
+            alt={ `Desfavoritar receita de ${pathname.includes('/foods')
+              ? recipe.strMeal : recipe.strDrink}` }
+            src={ favoriteIcon }
             onClick={ () => saveFavoriteRecipe(
               pathname, recipe, favoriteRecipes, setFavoriteRecipes,
             ) }
-          >
-            <img
-              width="26"
-              data-testid="favorite-btn"
-              src={ favoriteIcon }
-              alt="botão de favoritar"
-            />
-          </button>
+            data-testid="favorite-btn"
+          />
         </div>
       </header>
       <SectionLine />
