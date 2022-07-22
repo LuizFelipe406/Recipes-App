@@ -18,3 +18,26 @@
   font-weight: 600;
   position: absolute;
 }
+
+.recipe-image {
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  width: 100vw;
+}
+
+.recipe-title {
+  color: #6c757d;
+  font-family: Titan One , sans-serif;
+  font-size: 2em;
+}
+
+.section-title {
+  color: #6c757d;
+  font-family: Titan One , sans-serif;
+}
+
+.card-text {
+  font-family: Titan One , sans-serif;
+  opacity: 1;
+}

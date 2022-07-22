@@ -8,6 +8,7 @@ import { fetchDrinks, fetchFoods } from '../services/FetchApi';
 import Header from '../components/Header';
 import CategoryFilters from '../components/CategoryFilters';
 import Footer from '../components/Footer';
+import './Recipes.css';
 
 function Recipes({ history: { location: { pathname } } }) {
   const { data, setData } = useContext(RecipeContext);
@@ -27,13 +28,11 @@ function Recipes({ history: { location: { pathname } } }) {
   return (
     <Container
       fluid
-      className="p-0 m-0 pb-3"
-      style={ { width: '100vw' } }
+      className="p-0 m-0 pb-3 main-container"
     >
       <Header pathname={ pathname } />
       <CategoryFilters pathname={ pathname } />
       <Row
-        style={ { transition: '0.3s ease-in' } }
         xs={ 2 }
         md={ 4 }
         className="g-4 p-0 m-0 mx-2 mb-5"
@@ -50,8 +49,7 @@ function Recipes({ history: { location: { pathname } } }) {
               >
                 <Card
                   border="secondary"
-                  className="text-center"
-                  style={ { width: '10rem' } }
+                  className="text-center card"
                   data-testid={ `${index}-recipe-card` }
                 >
                   <Card.Img
@@ -62,12 +60,11 @@ function Recipes({ history: { location: { pathname } } }) {
                     data-testid={ `${index}-card-img` }
                   />
                   <Card.ImgOverlay
-                    className="d-flex justify-content-center align-items-center"
-                    style={ { backgroundColor: 'rgba(33, 37, 41, 0.5)' } }
+                    className="d-flex
+                    justify-content-center align-items-center card-image-overlay"
                   >
                     <Card.Title
-                      className="m-0 text-white fs-1"
-                      style={ { opacity: '1', fontFamily: 'Titan One' } }
+                      className="m-0 text-white fs-1 card-title"
                       data-testid={ `${index}-card-name` }
                     >
                       { pathname === '/foods' ? item.strMeal : item.strDrink }

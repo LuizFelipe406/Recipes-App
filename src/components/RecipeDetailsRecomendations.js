@@ -7,8 +7,7 @@ function Recomendations({ recomendations, pathname }) {
   return (
     <div>
       <h2
-        className="fs-5"
-        style={ { fontFamily: 'Titan One', color: '#6c757d' } }
+        className="fs-5 section-title"
       >
         RECOMENDATIONS
       </h2>
@@ -38,15 +37,13 @@ function Recomendations({ recomendations, pathname }) {
                   style={ { backgroundColor: 'rgba(33, 37, 41, 0.5)' } }
                 >
                   <Card.Title
-                    className="m-0 text-white fs-1"
-                    style={ { opacity: '1', fontFamily: 'Titan One' } }
+                    className="m-0 text-white fs-1 card-text"
                     data-testid={ `${index}-recomendation-title` }
                   >
                     { pathname.includes('/foods') ? item.strDrink : item.strMeal }
                   </Card.Title>
                   <Card.Subtitle
-                    className="m-0 text-white fs-5"
-                    style={ { opacity: '1', fontFamily: 'Titan One' } }
+                    className="m-0 text-white fs-5 card-text"
                   >
                     { item.strCategory }
                   </Card.Subtitle>

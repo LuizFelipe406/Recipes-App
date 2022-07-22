@@ -117,16 +117,13 @@ function RecipeDetails({ history, match }) {
       <img
         src={ pathname.includes('/foods') ? recipe.strMealThumb : recipe.strDrinkThumb }
         alt={ pathname.includes('/foods') ? recipe.strMeal : recipe.strDrink }
-        style={ {
-          height: '300px', width: '100vw', objectFit: 'cover', objectPosition: 'center',
-        } }
+        className="recipe-image"
         data-testid="recipe-photo"
       />
       <header className="d-flex justify-content-between align-item-center">
         <div className="mt-1">
           <h2
-            className=" ml-3 mt-3 d-inline mb-0 pb-0"
-            style={ { fontFamily: 'Titan One', fontSize: '2em', color: '#6c757d' } }
+            className=" ml-3 mt-3 d-inline mb-0 pb-0 recipe-title"
             data-testid="recipe-title"
           >
             { pathname.includes('/foods') ? recipe.strMeal : recipe.strDrink }
@@ -140,7 +137,7 @@ function RecipeDetails({ history, match }) {
         </div>
         <div className="mt-2">
           { isCoppied
-          && <span style={ { fontFamily: 'Source Sans Pro' } }>Link copied!</span> }
+          && <span className="section-title">Link copied!</span> }
           <button
             className="border-0"
             type="button"
@@ -168,8 +165,7 @@ function RecipeDetails({ history, match }) {
       <SectionLine />
       <Container className="mb-1">
         <span
-          className="fs-5"
-          style={ { fontFamily: 'Titan One', color: '#6c757d' } }
+          className="fs-5 section-title"
         >
           INGREDIENTS
         </span>
@@ -190,8 +186,7 @@ function RecipeDetails({ history, match }) {
       <SectionLine />
       <Container>
         <span
-          className="fs-5"
-          style={ { fontFamily: 'Titan One', color: '#6c757d' } }
+          className="fs-5 section-title"
         >
           INSTRUCTIONS
         </span>
