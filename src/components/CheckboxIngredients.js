@@ -5,12 +5,33 @@ import { saveIngredients } from '../services/localStorage';
 import RecipeContext from '../context/RecipeContext';
 
 function CheckboxIngredient(props) {
-  const { ingredients, history, recipe, path } = props;
-  const teste = JSON.parse(localStorage.getItem('inProgressFoods'));
+  const { ingredients, history, recipe, path, id } = props;
 
-  const [isChecked, setIsChecked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [ingredientsMarked, setIngredientesMarked] = useState([]);
+  const [inProgressRecipes, setInProgressRecipes] = useState({
+    meals: {},
+    cocktails: {},
+  });
+
+  useEffect(() => {
+    const inProgressRecipesStr = localStorage.getItem('inProgressRecipes')
+    || JSON.stringify({
+      meals: {},
+      cocktails: {},
+    });
+    console.log(inProgressRecipesStr);
+    setInProgressRecipes(JSON.parse(inProgressRecipesStr));
+  }, []);
+
+  useEffect(() => {
+    if (path.includes('/foods') && Object.keys(inProgressRecipes.meals).includes(id)) {
+      setIngredientesMarked(inProgressRecipes.meals[id]);
+    } if (path.includes('/drinks') && Object.keys(inProgressRecipes
+      .cocktails).includes(id)) {
+      setIngredientesMarked(inProgressRecipes.cocktails[id]);
+    }
+  }, [id, path, inProgressRecipes]);
 
   const { doneRecipes, setDoneRecipes } = useContext(RecipeContext);
 
@@ -28,17 +49,36 @@ function CheckboxIngredient(props) {
 
   const handleChange = ({ target }) => {
     const { checked, value } = target;
-    let selectdIngredients = [...ingredientsMarked];
-    setIsChecked(checked);
+
+    let selectdIngredients = [];
+    // setIsChecked(checked);
 
     if (checked === true) {
-      selectdIngredients = [...selectdIngredients, value];
+      selectdIngredients = [...ingredientsMarked, value];
     } else {
-      selectdIngredients.splice(ingredientsMarked.indexOf(value), 1);
+      selectdIngredients = ingredientsMarked
+        .filter((item) => (item !== value));
     }
+    let newInProgress = {};
+    if (path.includes('/foods')) {
+      newInProgress = { ...inProgressRecipes,
+        meals: {
+          ...inProgressRecipes.meals,
+          [id]: selectdIngredients,
+        },
 
-    setIngredientesMarked(selectdIngredients);
-    saveIngredients(JSON.stringify(selectdIngredients));
+      };
+    } else {
+      newInProgress = { ...inProgressRecipes,
+        cocktails: {
+          ...inProgressRecipes.cocktails,
+          [id]: selectdIngredients,
+        },
+
+      };
+    }
+    setInProgressRecipes(newInProgress);
+    saveIngredients(JSON.stringify(newInProgress));
   };
 
   const scratchIngredient = (ingredient) => (
@@ -64,25 +104,34 @@ function CheckboxIngredient(props) {
 
   return (
     <div>
-      {
-        ingredients.map((ingredient, i) => (
-          <label
-            htmlFor={ ingredient }
-            key={ ingredient }
-            className={ scratchIngredient(ingredient) }
-            data-testid={ `${i}-ingredient-step` }
-          >
-            <input
-              type="checkbox"
-              id={ ingredient }
-              value={ ingredient }
-              checked={ teste && teste.includes(ingredient) ? true : isChecked[i] }
-              onChange={ handleChange }
-            />
-            { ingredient }
-          </label>
-        ))
-      }
+      { ingredientsMarked && ingredients.map((ingredient, i) => (
+        <label
+          htmlFor={ ingredient }
+          key={ ingredient }
+          className={ scratchIngredient(ingredient) }
+          data-testid={ `${i}-ingredient-step` }
+        >
+          { (ingredientsMarked.includes(ingredient))
+            ? (
+
+              <input
+                type="checkbox"
+                id={ ingredient }
+                value={ ingredient }
+                onChange={ handleChange }
+                defaultChecked
+              />
+            ) : (
+              <input
+                type="checkbox"
+                id={ ingredient }
+                value={ ingredient }
+                onChange={ handleChange }
+              />
+            )}
+          { ingredient }
+        </label>
+      ))}
       <div>
         <button
           type="button"
@@ -102,6 +151,7 @@ CheckboxIngredient.propTypes = {
   history: PropTypes.shape().isRequired,
   recipe: PropTypes.shape().isRequired,
   path: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default CheckboxIngredient;

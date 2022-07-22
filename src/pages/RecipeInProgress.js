@@ -10,7 +10,6 @@ function RecipeInProgress(props) {
   const { id } = params;
 
   const [recipe, setRecipe] = useState([]);
-
   useEffect(() => {
     const getFood = async () => {
       setRecipe(await fetchFoodById(id));

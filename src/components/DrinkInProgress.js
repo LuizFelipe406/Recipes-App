@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import CheckboxIngredient from './CheckboxIngredients';
+import CheckboxIngredients from './CheckboxIngredients';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -118,11 +118,12 @@ function DrinkInProgress(props) {
             data-testid="favorite-btn"
           />
           <p data-testid="recipe-category">{ strAlcoholic }</p>
-          <CheckboxIngredient
+          <CheckboxIngredients
             ingredients={ getIngredients() }
             history={ history }
             recipe={ rec }
             path={ path }
+            id={ id }
           />
           <p data-testid="instructions">{ strInstructions }</p>
         </div>
