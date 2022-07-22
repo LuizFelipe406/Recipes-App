@@ -93,7 +93,7 @@ function CheckboxIngredient(props) {
               type="checkbox"
               id={ ingredient }
               value={ ingredient }
-              checked={ !!ingredientsMarked
+              checked={ ingredientsMarked
                 .includes(ingredient) }
               onChange={ handleChange }
             />
