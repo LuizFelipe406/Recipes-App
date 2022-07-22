@@ -139,7 +139,7 @@ function RecipeDetails({ history, match }) {
           { isCoppied
           && <span className="section-title">Link copied!</span> }
           <input
-            className="border-0"
+            className="border-0 mr-2"
             type="image"
             alt={ `Compartilhar receita de ${pathname.includes('/foods')
               ? recipe.strMeal : recipe.strDrink}` }
@@ -148,7 +148,8 @@ function RecipeDetails({ history, match }) {
             data-testid="share-btn"
           />
           <input
-            className="border-0"
+            width="26"
+            className="border-0 mr-2"
             type="image"
             alt={ `Desfavoritar receita de ${pathname.includes('/foods')
               ? recipe.strMeal : recipe.strDrink}` }
