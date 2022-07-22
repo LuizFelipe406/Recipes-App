@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Card, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import {
   fetchDrinkById, fetchDrinkRecomendations, fetchFoodById, fetchFoodRecomendations,
 } from '../services/FetchApi';
@@ -10,8 +9,9 @@ import RecipeContext from '../context/RecipeContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-
-const copy = require('clipboard-copy');
+import { copyToClipBoard, saveFavoriteRecipe } from '../services/RecipeDetailsFunctions';
+import SectionLine from '../components/SectionLine';
+import Recomendations from '../components/RecipeDetailsRecomendations';
 
 const SOURCE_FONT = 'Source Sans Pro';
 
@@ -99,39 +99,6 @@ function RecipeDetails({ history, match }) {
     getRecomendations();
   }, [pathname]);
 
-  const copyToClipBoard = () => {
-    if (isCoppied) copy('');
-    else copy(`http://localhost:3000${pathname}`);
-    setIsCoppied((oldState) => !oldState);
-  };
-
-  const saveFavoriteRecipe = () => {
-    const favObject = {
-      id: (pathname.includes('/foods') ? recipe.idMeal : recipe.idDrink),
-      type: (pathname.includes('/foods') ? 'food' : 'drink'),
-      nationality: recipe.strArea || '',
-      category: recipe.strCategory,
-      alcoholicOrNot: (pathname.includes('/foods') ? '' : recipe.strAlcoholic),
-      name: (pathname.includes('/foods') ? recipe.strMeal : recipe.strDrink),
-      image: (pathname.includes('/foods') ? recipe.strMealThumb : recipe.strDrinkThumb),
-    };
-    let newFavoriteRecipes = [];
-    if (favoriteRecipes.some((item) => item.id === id)) {
-      newFavoriteRecipes = favoriteRecipes.filter(
-        (item) => (item.id !== favObject.id),
-      );
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
-      setFavoriteRecipes(newFavoriteRecipes);
-    } else {
-      newFavoriteRecipes = [
-        ...favoriteRecipes,
-        favObject,
-      ];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
-      setFavoriteRecipes(newFavoriteRecipes);
-    }
-  };
-
   return (
     <Container className="p-0 m-0" style={ { backgroundColor: '#e9ecef' } }>
       <img
@@ -168,11 +135,17 @@ function RecipeDetails({ history, match }) {
             className="border-0"
             type="button"
             data-testid="share-btn"
-            onClick={ copyToClipBoard }
+            onClick={ () => copyToClipBoard(setIsCoppied, isCoppied, pathname) }
           >
             <img src={ shareIcon } alt="botão de compartilhar" />
           </button>
-          <button className="border-0" type="button" onClick={ saveFavoriteRecipe }>
+          <button
+            className="border-0"
+            type="button"
+            onClick={ () => saveFavoriteRecipe(
+              pathname, recipe, favoriteRecipes, setFavoriteRecipes,
+            ) }
+          >
             <img
               width="26"
               data-testid="favorite-btn"
@@ -182,12 +155,7 @@ function RecipeDetails({ history, match }) {
           </button>
         </div>
       </header>
-      <div
-        className="mt-2 mb-3"
-        style={ {
-          margin: '0 auto', width: '90vw', height: '0.5px', border: '0.5px solid #ced4da',
-        } }
-      />
+      <SectionLine />
       <Container className="mb-1">
         <span
           className="fs-5"
@@ -211,12 +179,7 @@ function RecipeDetails({ history, match }) {
           }
         </ul>
       </Container>
-      <div
-        className="mt-4 mb-3"
-        style={ {
-          margin: '0 auto', width: '90vw', height: '0.5px', border: '0.5px solid #ced4da',
-        } }
-      />
+      <SectionLine />
       <Container>
         <span
           className="fs-5"
@@ -247,63 +210,9 @@ function RecipeDetails({ history, match }) {
           />
         )
       }
-      <div
-        className="mt-4 mb-3"
-        style={ {
-          margin: '0 auto', width: '90vw', height: '0.5px', border: '0.5px solid #ced4da',
-        } }
-      />
+      <SectionLine />
       <Container className="mb-2">
-        <h2
-          className="fs-5"
-          style={ { fontFamily: 'Titan One', color: '#6c757d' } }
-        >
-          RECOMENDATIONS
-        </h2>
-        <div className="recomendations-container">
-          {
-            recomendations.map((item, index) => (
-              <Link
-                to={ pathname.includes('/foods')
-                  ? `/drinks/${item.idDrink}` : `/foods/${item.idMeal}` }
-                data-testid={ `${index}-recomendation-card` }
-                key={ index }
-              >
-                <Card
-                  border="secondary"
-                  className="text-center mr-4"
-                  style={ { width: '10rem' } }
-                >
-                  <Card.Img
-                    src={ pathname.includes('/foods')
-                      ? item.strDrinkThumb : item.strMealThumb }
-                    alt={ pathname.includes('/foods') ? item.strDrink : item.strMeal }
-                    width="150px"
-                  />
-                  <Card.ImgOverlay
-                    className="d-flex
-                    flex-column justify-content-center align-items-center"
-                    style={ { backgroundColor: 'rgba(33, 37, 41, 0.5)' } }
-                  >
-                    <Card.Title
-                      className="m-0 text-white fs-1"
-                      style={ { opacity: '1', fontFamily: 'Titan One' } }
-                      data-testid={ `${index}-recomendation-title` }
-                    >
-                      { pathname.includes('/foods') ? item.strDrink : item.strMeal }
-                    </Card.Title>
-                    <Card.Subtitle
-                      className="m-0 text-white fs-5"
-                      style={ { opacity: '1', fontFamily: 'Titan One' } }
-                    >
-                      { item.strCategory }
-                    </Card.Subtitle>
-                  </Card.ImgOverlay>
-                </Card>
-              </Link>
-            ))
-          }
-        </div>
+        <Recomendations recomendations={ recomendations } pathname={ pathname } />
       </Container>
       {
         (!doneRecipes.some((doneRecipe) => (
