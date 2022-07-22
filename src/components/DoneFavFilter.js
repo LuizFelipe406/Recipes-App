@@ -1,16 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import RecipeContext from '../context/RecipeContext';
 
-function DoneFilter() {
-  const { doneRecipes, setFilteredRecipes } = useContext(RecipeContext);
+function DoneFavFilter({ pathname }) {
+  const { doneRecipes, favoriteRecipes, setFilteredRecipes } = useContext(RecipeContext);
+  let recipes = doneRecipes;
+  if (pathname === '/favorite-recipes') {
+    recipes = favoriteRecipes;
+  }
+
+  useEffect(() => {}, [doneRecipes, favoriteRecipes]);
 
   const changeFilter = ({ target: { value } }) => {
     if (value === 'all') {
-      setFilteredRecipes(doneRecipes);
+      setFilteredRecipes(recipes);
       return;
     }
     setFilteredRecipes(
-      doneRecipes.filter((recipe) => recipe.type === value),
+      recipes.filter((recipe) => recipe.type === value),
     );
   };
 
@@ -44,4 +51,8 @@ function DoneFilter() {
   );
 }
 
-export default DoneFilter;
+DoneFavFilter.propTypes = {
+  pathname: PropTypes.string.isRequired,
+};
+
+export default DoneFavFilter;
