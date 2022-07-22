@@ -54,7 +54,7 @@ function CheckboxIngredient(props) {
       name: (path.includes('/foods') ? recipe.strMeal : recipe.strDrink),
       image: (path.includes('/foods') ? recipe.strMealThumb : recipe.strDrinkThumb),
       tags: (typeof recipe.strTags === 'string' ? recipe.strTags.split(', ') : []),
-      doneDate: 'PLACEHOLDER',
+      doneDate: `Done in: ${new Date().toLocaleDateString()}`,
     };
     doneRecipes.push(doneObject);
     localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
