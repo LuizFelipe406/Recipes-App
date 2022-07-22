@@ -23,7 +23,7 @@ function RecipeDetails({ history, match }) {
   const [isCoppied, setIsCoppied] = useState(false);
   const [favoriteIcon, setFavoriteIcon] = useState(whiteHeartIcon);
   const {
-    doneRecipes, inProgressRecipes, setFavoriteRecipes, favoriteRecipes,
+    doneRecipes, setFavoriteRecipes, favoriteRecipes,
   } = useContext(RecipeContext);
 
   useEffect(() => {
@@ -37,6 +37,12 @@ function RecipeDetails({ history, match }) {
   }, [favoriteIcon, favoriteRecipes, recipe, pathname]);
 
   useEffect(() => {
+    const inProgressRecipesStr = localStorage.getItem('inProgressRecipes')
+    || JSON.stringify({
+      meals: [],
+      cocktails: [],
+    });
+    const inProgressRecipes = JSON.parse(inProgressRecipesStr);
     if (pathname.includes('/foods') && Object.keys(inProgressRecipes).length > 0) {
       setButtonName(() => (Object.keys(inProgressRecipes.meals).includes(recipe.idMeal)
         ? 'Continue Recipe' : START_RECIPE
@@ -46,7 +52,7 @@ function RecipeDetails({ history, match }) {
         .includes(recipe.idDrink)
         ? 'Continue Recipe' : START_RECIPE));
     }
-  }, [inProgressRecipes, pathname, recipe]);
+  }, [pathname, recipe]);
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -150,10 +156,7 @@ function RecipeDetails({ history, match }) {
       >
         <img src={ shareIcon } alt="botão de compartilhar" />
       </button>
-      <button
-        type="button"
-        onClick={ saveFavoriteRecipe }
-      >
+      <button type="button" onClick={ saveFavoriteRecipe }>
         <img
           data-testid="favorite-btn"
           src={ favoriteIcon }
