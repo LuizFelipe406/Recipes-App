@@ -19,7 +19,7 @@ function RecipeDetails({ history, match }) {
   const START_RECIPE = 'Start Recipe';
   const { location: { pathname } } = history;
   const { params: { id } } = match;
-  const [recipe, setRecipe] = useState({});
+  const [recipe, setRecipe] = useState({ strYoutube: '' });
   const [ingredients, setIngredients] = useState([]);
   const [recomendations, setRecomendations] = useState([]);
   const [buttonName, setButtonName] = useState(START_RECIPE);
@@ -201,7 +201,7 @@ function RecipeDetails({ history, match }) {
           <iframe
             width="100%"
             height="315"
-            src="https://www.youtube.com/embed/VVnZd8A84z4"
+            src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
