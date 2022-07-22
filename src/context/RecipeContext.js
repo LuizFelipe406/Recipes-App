@@ -23,7 +23,7 @@ export function RecipeProvider({ children }) {
   const [data, setData] = useState(false);
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
-  const [inProgressRecipes, setInProgressRecipes] = useState([]);
+  // const [inProgressRecipes, setInProgressRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [categories, setCategories] = useState({
     foodCategories: [],
@@ -38,9 +38,6 @@ export function RecipeProvider({ children }) {
     const storageFavoriteRecipes = localStorage.getItem('favoriteRecipes')
     || JSON.stringify([]);
     setFavoriteRecipes(JSON.parse(storageFavoriteRecipes));
-    const storageInProgressRecipes = localStorage.getItem('inProgressRecipes')
-    || JSON.stringify([]);
-    setInProgressRecipes(JSON.parse(storageInProgressRecipes));
   }, []);
 
   useEffect(() => {
@@ -150,8 +147,6 @@ export function RecipeProvider({ children }) {
     setDoneRecipes,
     favoriteRecipes,
     setFavoriteRecipes,
-    inProgressRecipes,
-    setInProgressRecipes,
     newSearch,
     categories,
     updateCategoryFilter,

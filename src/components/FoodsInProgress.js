@@ -119,7 +119,12 @@ function FoodInProgress(props) {
             />
           </button>
           <p data-testid="recipe-category">{ strCategory }</p>
-          <CheckboxIngredient ingredients={ getIngredients() } history={ history } />
+          <CheckboxIngredient
+            path={ path }
+            id={ id }
+            ingredients={ getIngredients() }
+            history={ history }
+          />
           <p data-testid="instructions">{ strInstructions }</p>
         </div>
       );
