@@ -5,7 +5,7 @@ export const saveLocalStorage = (userEmail) => {
 };
 
 export const saveIngredients = (ingredients) => {
-  localStorage.setItem('inProgressFoods', ingredients);
+  localStorage.setItem('inProgressRecipes', ingredients);
 };
 
 export const cleanLocalStorage = () => {
