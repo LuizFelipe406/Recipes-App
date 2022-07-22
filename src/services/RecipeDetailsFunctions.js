@@ -36,5 +36,10 @@ export const saveFavoriteRecipe = (
 };
 
 export const returnPage = (history) => {
-  history.goBack();
+  const { location: { pathname } } = history;
+  if (pathname.includes('/foods')) {
+    history.push('/foods');
+  } else {
+    history.push('/drinks');
+  }
 };
