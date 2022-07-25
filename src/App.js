@@ -16,7 +16,10 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <RecipeProvider>
-      <ToastContainer theme="colored" />
+      <ToastContainer
+        theme="colored"
+        toastStyle={ { backgroundColor: '#198754' } }
+      />
       <Switch>
         <Route path="/foods/:id/in-progress" component={ RecipeInProgress } />
         <Route path="/drinks/:id/in-progress" component={ RecipeInProgress } />
