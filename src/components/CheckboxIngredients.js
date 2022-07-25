@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './CheckboxIngredient.css';
+import { Button } from 'react-bootstrap';
 import { saveIngredients } from '../services/localStorage';
 import RecipeContext from '../context/RecipeContext';
 
@@ -13,6 +14,8 @@ function CheckboxIngredient(props) {
     meals: {},
     cocktails: {},
   });
+
+  const { doneRecipes, setDoneRecipes } = useContext(RecipeContext);
 
   useEffect(() => {
     const inProgressRecipesStr = localStorage.getItem('inProgressRecipes')
@@ -32,8 +35,6 @@ function CheckboxIngredient(props) {
       setIngredientesMarked(inProgressRecipes.cocktails[id]);
     }
   }, [id, path, inProgressRecipes]);
-
-  const { doneRecipes, setDoneRecipes } = useContext(RecipeContext);
 
   useEffect(() => {
     const enabledButton = () => {
@@ -103,44 +104,47 @@ function CheckboxIngredient(props) {
   };
 
   return (
-    <div>
-      { ingredientsMarked && ingredients.map((ingredient, i) => (
-        <label
-          htmlFor={ ingredient }
-          key={ ingredient }
-          className={ scratchIngredient(ingredient) }
-          data-testid={ `${i}-ingredient-step` }
-        >
-          { (ingredientsMarked.includes(ingredient))
-            ? (
+    <div className="d-flex flex-column justify-content-center align-items-center mb-4">
+      <div className="d-flex justify-content-center align-items-center flex-wrap">
+        { ingredientsMarked && ingredients.map((ingredient, i) => (
+          <label
+            htmlFor={ ingredient }
+            key={ ingredient }
+            className={ scratchIngredient(ingredient) }
+            data-testid={ `${i}-ingredient-step` }
+          >
+            { (ingredientsMarked.includes(ingredient))
+              ? (
 
-              <input
-                type="checkbox"
-                id={ ingredient }
-                value={ ingredient }
-                onChange={ handleChange }
-                defaultChecked
-              />
-            ) : (
-              <input
-                type="checkbox"
-                id={ ingredient }
-                value={ ingredient }
-                onChange={ handleChange }
-              />
-            )}
-          { ingredient }
-        </label>
-      ))}
+                <input
+                  type="checkbox"
+                  id={ ingredient }
+                  value={ ingredient }
+                  onChange={ handleChange }
+                  defaultChecked
+                />
+              ) : (
+                <input
+                  type="checkbox"
+                  id={ ingredient }
+                  value={ ingredient }
+                  onChange={ handleChange }
+                />
+              )}
+            { ingredient }
+          </label>
+        ))}
+      </div>
       <div>
-        <button
+        <Button
+          variant={ isDisabled ? 'danger' : 'primary' }
           type="button"
           disabled={ isDisabled }
           onClick={ finishRecipe }
           data-testid="finish-recipe-btn"
         >
           Finalizar Receita
-        </button>
+        </Button>
       </div>
     </div>
   );
