@@ -104,35 +104,37 @@ function CheckboxIngredient(props) {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center flex-wrap mb-4">
-      { ingredientsMarked && ingredients.map((ingredient, i) => (
-        <label
-          htmlFor={ ingredient }
-          key={ ingredient }
-          className={ scratchIngredient(ingredient) }
-          data-testid={ `${i}-ingredient-step` }
-        >
-          { (ingredientsMarked.includes(ingredient))
-            ? (
+    <div className="d-flex flex-column justify-content-center align-items-center mb-4">
+      <div className="d-flex justify-content-center align-items-center flex-wrap">
+        { ingredientsMarked && ingredients.map((ingredient, i) => (
+          <label
+            htmlFor={ ingredient }
+            key={ ingredient }
+            className={ scratchIngredient(ingredient) }
+            data-testid={ `${i}-ingredient-step` }
+          >
+            { (ingredientsMarked.includes(ingredient))
+              ? (
 
-              <input
-                type="checkbox"
-                id={ ingredient }
-                value={ ingredient }
-                onChange={ handleChange }
-                defaultChecked
-              />
-            ) : (
-              <input
-                type="checkbox"
-                id={ ingredient }
-                value={ ingredient }
-                onChange={ handleChange }
-              />
-            )}
-          { ingredient }
-        </label>
-      ))}
+                <input
+                  type="checkbox"
+                  id={ ingredient }
+                  value={ ingredient }
+                  onChange={ handleChange }
+                  defaultChecked
+                />
+              ) : (
+                <input
+                  type="checkbox"
+                  id={ ingredient }
+                  value={ ingredient }
+                  onChange={ handleChange }
+                />
+              )}
+            { ingredient }
+          </label>
+        ))}
+      </div>
       <div>
         <Button
           variant={ isDisabled ? 'danger' : 'primary' }
