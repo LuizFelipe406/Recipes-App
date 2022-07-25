@@ -23,7 +23,6 @@ function RecipeDetails({ history, match }) {
   const [ingredients, setIngredients] = useState([]);
   const [recomendations, setRecomendations] = useState([]);
   const [buttonName, setButtonName] = useState(START_RECIPE);
-  const [isCoppied, setIsCoppied] = useState(false);
   const [favoriteIcon, setFavoriteIcon] = useState(whiteHeartIcon);
   const {
     doneRecipes, setFavoriteRecipes, favoriteRecipes,
@@ -136,15 +135,13 @@ function RecipeDetails({ history, match }) {
           </h3>
         </div>
         <div className="mt-2">
-          { isCoppied
-          && <span className="section-title">Link copied!</span> }
           <input
             className="border-0 mr-2"
             type="image"
             alt={ `Compartilhar receita de ${pathname.includes('/foods')
               ? recipe.strMeal : recipe.strDrink}` }
             src={ shareIcon }
-            onClick={ () => copyToClipBoard(setIsCoppied, isCoppied, pathname) }
+            onClick={ () => copyToClipBoard(pathname) }
             data-testid="share-btn"
           />
           <input

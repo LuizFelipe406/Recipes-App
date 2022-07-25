@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import CheckboxIngredients from './CheckboxIngredients';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -12,7 +13,6 @@ function DrinkInProgress(props) {
   const { recipe, path, id, history } = props;
   const ingredients = [];
 
-  const [isCoppied, setIsCoppied] = useState(false);
   const [recipes, setRecipes] = useState({});
   const [favoriteIcon, setFavoriteIcon] = useState('');
 
@@ -42,9 +42,8 @@ function DrinkInProgress(props) {
   }, [favoriteIcon, favoriteRecipes, recipes, path]);
 
   const copyToClipBoard = () => {
-    if (isCoppied) copy('');
-    else copy(`http://localhost:3000${path}`);
-    setIsCoppied((oldState) => !oldState);
+    copy(`http://localhost:3000${path}`);
+    toast.success('Link copied!');
   };
 
   const saveFavoriteRecipe = () => {
@@ -98,9 +97,6 @@ function DrinkInProgress(props) {
             data-testid="recipe-photo"
           />
           <p data-testid="recipe-title">{ strDrink }</p>
-          {
-            isCoppied && <span>Link copied!</span>
-          }
           <input
             type="image"
             alt={ `Compartilhar receita de ${path.includes('/foods')
