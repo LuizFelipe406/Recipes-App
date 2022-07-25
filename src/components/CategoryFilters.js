@@ -35,7 +35,7 @@ function CategoryFilters({ pathname }) {
       fluid
       className="p-0"
     >
-      <ButtonToolbar className="m-0" style={ { width: '100vw' } }>
+      <ButtonToolbar className="m-0 bg-white" style={ { width: '100vw' } }>
         <ButtonGroup style={ { width: '100vw' } }>
           <Button
             style={ {
@@ -58,7 +58,7 @@ function CategoryFilters({ pathname }) {
           {(pathname === '/drinks') && drinkCategories.slice(0, 2).map(buttonCreator)}
         </ButtonGroup>
       </ButtonToolbar>
-      <ButtonToolbar className="mb-1 mt-0" style={ { width: '100vw' } }>
+      <ButtonToolbar className="mb-1 mt-0 bg-white" style={ { width: '100vw' } }>
         <ButtonGroup style={ { width: '100vw' } }>
           {(pathname === '/foods') && foodCategories.slice(2).map(buttonCreator)}
 
