@@ -16,6 +16,7 @@ function FavoriteButton({ recipe: { id, name }, index }) {
 
   return (
     <input
+      className="ml-1"
       type="image"
       alt={ `Desfavoritar receita de ${name}` }
       src={ blackHeartIcon }

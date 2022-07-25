@@ -26,9 +26,10 @@
 }
 
 .share-container {
-  left: 220px;
+  left: 230px;
   position: absolute;
   top: 220px;
+  width: fit-content;
 }
 
 .tags-container {

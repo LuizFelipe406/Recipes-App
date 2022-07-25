@@ -10,11 +10,11 @@ import './DoneRecipes.css';
 
 function DoneRecipes({ history: { location: { pathname } } }) {
   const { doneRecipes, filteredRecipes, setFilteredRecipes } = useContext(RecipeContext);
-
+  console.log(filteredRecipes);
   useEffect(() => setFilteredRecipes(doneRecipes), [doneRecipes, setFilteredRecipes]);
 
   const createRecipeCards = (recipe, index) => (
-    <Card className="done-card shadow-sm">
+    <Card key={ index } className="done-card shadow-sm">
       <Link to={ `/${recipe.type}s/${recipe.id}` }>
         <Card.Img
           className="done-image"
@@ -55,7 +55,7 @@ function DoneRecipes({ history: { location: { pathname } } }) {
         </Card.Header>
         <Card.Text className="fs-4 ml-2">Tags</Card.Text>
         <div className="tags-container">
-          {recipe.tags.map(
+          {recipe.length > 0 && recipe.tags.map(
             (tag, ind) => (
               <span
                 className="tag"
@@ -83,7 +83,7 @@ function DoneRecipes({ history: { location: { pathname } } }) {
         md={ 4 }
         className="g-4 p-0 m-0 mx-2 mb-5 card-container mt-3"
       >
-        { filteredRecipes.map(createRecipeCards) }
+        { filteredRecipes.length > 0 && filteredRecipes.map(createRecipeCards) }
       </Row>
     </Container>
   );
