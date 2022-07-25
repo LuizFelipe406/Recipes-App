@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 import {
   fetchDrinkById, fetchDrinkRecomendations, fetchFoodById, fetchFoodRecomendations,
 } from '../services/FetchApi';
@@ -9,14 +9,17 @@ import RecipeContext from '../context/RecipeContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-
-const copy = require('clipboard-copy');
+import {
+  copyToClipBoard, saveFavoriteRecipe, returnPage,
+} from '../services/RecipeDetailsFunctions';
+import SectionLine from '../components/SectionLine';
+import Recomendations from '../components/RecipeDetailsRecomendations';
 
 function RecipeDetails({ history, match }) {
   const START_RECIPE = 'Start Recipe';
   const { location: { pathname } } = history;
   const { params: { id } } = match;
-  const [recipe, setRecipe] = useState({});
+  const [recipe, setRecipe] = useState({ strYoutube: '' });
   const [ingredients, setIngredients] = useState([]);
   const [recomendations, setRecomendations] = useState([]);
   const [buttonName, setButtonName] = useState(START_RECIPE);
@@ -102,91 +105,103 @@ function RecipeDetails({ history, match }) {
     getRecomendations();
   }, [pathname]);
 
-  const copyToClipBoard = () => {
-    if (isCoppied) copy('');
-    else copy(`http://localhost:3000${pathname}`);
-    setIsCoppied((oldState) => !oldState);
-  };
-
-  const saveFavoriteRecipe = () => {
-    const favObject = {
-      id: (pathname.includes('/foods') ? recipe.idMeal : recipe.idDrink),
-      type: (pathname.includes('/foods') ? 'food' : 'drink'),
-      nationality: recipe.strArea || '',
-      category: recipe.strCategory,
-      alcoholicOrNot: (pathname.includes('/foods') ? '' : recipe.strAlcoholic),
-      name: (pathname.includes('/foods') ? recipe.strMeal : recipe.strDrink),
-      image: (pathname.includes('/foods') ? recipe.strMealThumb : recipe.strDrinkThumb),
-    };
-    let newFavoriteRecipes = [];
-    if (favoriteRecipes.some((item) => item.id === id)) {
-      newFavoriteRecipes = favoriteRecipes.filter(
-        (item) => (item.id !== favObject.id),
-      );
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
-      setFavoriteRecipes(newFavoriteRecipes);
-    } else {
-      newFavoriteRecipes = [
-        ...favoriteRecipes,
-        favObject,
-      ];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
-      setFavoriteRecipes(newFavoriteRecipes);
-    }
-  };
-
   return (
-    <main>
+    <Container className="p-0 m-0" style={ { backgroundColor: '#e9ecef' } }>
+      <button
+        type="button"
+        className="text-black m-2 return-button"
+        onClick={ () => returnPage(history) }
+      >
+        {'<'}
+      </button>
       <img
         src={ pathname.includes('/foods') ? recipe.strMealThumb : recipe.strDrinkThumb }
         alt={ pathname.includes('/foods') ? recipe.strMeal : recipe.strDrink }
-        style={ { height: '200px' } }
+        className="recipe-image"
         data-testid="recipe-photo"
       />
-      <h2 data-testid="recipe-title">
-        { pathname.includes('/foods') ? recipe.strMeal : recipe.strDrink }
-      </h2>
-      {isCoppied && <span>Link copied!</span>}
-      <input
-        type="image"
-        alt={ `Compartilhar receita de ${pathname.includes('/foods')
-          ? recipe.strMeal : recipe.strDrink}` }
-        src={ shareIcon }
-        onClick={ copyToClipBoard }
-        data-testid="share-btn"
-      />
-      <input
-        type="image"
-        alt={ `Desfavoritar receita de ${pathname.includes('/foods')
-          ? recipe.strMeal : recipe.strDrink}` }
-        src={ favoriteIcon }
-        onClick={ saveFavoriteRecipe }
-        data-testid="favorite-btn"
-      />
-      <h3 data-testid="recipe-category">
-        { pathname.includes('/foods') ? recipe.strCategory : recipe.strAlcoholic }
-      </h3>
-      <ul>
-        {
-          ingredients.length > 0 && ingredients.map((ingredient, index) => (
-            <li
-              key={ index }
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
-              { `${ingredient.name} ${ingredient.quantity}`}
-            </li>
-          ))
-        }
-      </ul>
-      <p data-testid="instructions">
-        { recipe.strInstructions }
-      </p>
+      <header className="d-flex justify-content-between align-item-center">
+        <div className="mt-1">
+          <h2
+            className=" ml-3 mt-3 d-inline mb-0 pb-0 recipe-title"
+            data-testid="recipe-title"
+          >
+            { pathname.includes('/foods') ? recipe.strMeal : recipe.strDrink }
+          </h2>
+          <h3
+            className="ml-3 mt-0 fs-4 pt-0 normal-text"
+            data-testid="recipe-category"
+          >
+            { pathname.includes('/foods') ? recipe.strCategory : recipe.strAlcoholic }
+          </h3>
+        </div>
+        <div className="mt-2">
+          { isCoppied
+          && <span className="section-title">Link copied!</span> }
+          <input
+            className="border-0 mr-2"
+            type="image"
+            alt={ `Compartilhar receita de ${pathname.includes('/foods')
+              ? recipe.strMeal : recipe.strDrink}` }
+            src={ shareIcon }
+            onClick={ () => copyToClipBoard(setIsCoppied, isCoppied, pathname) }
+            data-testid="share-btn"
+          />
+          <input
+            width="26"
+            className="border-0 mr-2"
+            type="image"
+            alt={ `Desfavoritar receita de ${pathname.includes('/foods')
+              ? recipe.strMeal : recipe.strDrink}` }
+            src={ favoriteIcon }
+            onClick={ () => saveFavoriteRecipe(
+              pathname, recipe, favoriteRecipes, setFavoriteRecipes,
+            ) }
+            data-testid="favorite-btn"
+          />
+        </div>
+      </header>
+      <SectionLine />
+      <Container className="mb-1">
+        <span
+          className="fs-5 section-title"
+        >
+          INGREDIENTS
+        </span>
+        <ul className="m-0 p-0 ml-4">
+          {
+            ingredients.length > 0 && ingredients.map((ingredient, index) => (
+              <li
+                className="fs-5 normal-text"
+                key={ index }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+              >
+                { `${ingredient.name} ${ingredient.quantity}`}
+              </li>
+            ))
+          }
+        </ul>
+      </Container>
+      <SectionLine />
+      <Container>
+        <span
+          className="fs-5 section-title"
+        >
+          INSTRUCTIONS
+        </span>
+        <p
+          className="ml-1 mr-1 fs-5 normal-text"
+          data-testid="instructions"
+        >
+          { recipe.strInstructions }
+        </p>
+      </Container>
       {
         pathname.includes('/foods') && (
           <iframe
             width="100%"
             height="315"
-            src="https://www.youtube.com/embed/VVnZd8A84z4"
+            src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
@@ -195,56 +210,29 @@ function RecipeDetails({ history, match }) {
           />
         )
       }
-      <h2>Recomendations</h2>
-      <div className="recomendations-container">
-        {
-          recomendations.map((item, index) => (
-            <Link
-              to={ pathname.includes('/foods')
-                ? `/drinks/${item.idDrink}` : `/foods/${item.idMeal}` }
-              data-testid={ `${index}-recomendation-card` }
-              key={ index }
-            >
-              <div className="recomendation-card">
-                <img
-                  src={ pathname.includes('/foods')
-                    ? item.strDrinkThumb : item.strMealThumb }
-                  alt={ pathname.includes('/foods') ? item.strDrink : item.strMeal }
-                  width="150px"
-                />
-                <h3
-                  data-testid={ `${index}-recomendation-title` }
-                >
-                  { pathname.includes('/foods') ? item.strDrink : item.strMeal }
-                </h3>
-                <h4>{ item.strCategory }</h4>
-              </div>
-            </Link>
-          ))
-        }
-      </div>
-      <div className="button-container">
-        {
-          (!doneRecipes.some((doneRecipe) => (
-            doneRecipe.id === (pathname.includes('food') ? recipe.idMeal : recipe.idDrink)
-          ))) && (
-            <button
-              type="button"
-              data-testid="start-recipe-btn"
-              onClick={ () => history.push(`${pathname}/in-progress`) }
-            >
-              { buttonName }
-            </button>
-          )
-        }
-      </div>
-    </main>
+      <SectionLine />
+      <Container className="mb-2">
+        <Recomendations recomendations={ recomendations } pathname={ pathname } />
+      </Container>
+      {
+        (!doneRecipes.some((doneRecipe) => (
+          doneRecipe.id === (pathname.includes('food') ? recipe.idMeal : recipe.idDrink)
+        ))) && (
+          <button
+            className="fixed-bottom text-bg-success border-0 p-2 fs-5 normal-text"
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ () => history.push(`${pathname}/in-progress`) }
+          >
+            { buttonName }
+          </button>
+        )
+      }
+    </Container>
   );
 }
 
-RecipeDetails.propTypes = {
-  history: PropTypes.shape().isRequired,
-  match: PropTypes.shape().isRequired,
-};
+RecipeDetails.propTypes = { history: PropTypes.shape(), match: PropTypes.shape(),
+}.isRequired;
 
 export default RecipeDetails;
