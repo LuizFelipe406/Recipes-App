@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import CheckboxIngredients from './CheckboxIngredients';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import RecipeContext from '../context/RecipeContext';
 import { fetchDrinkById, fetchFoodById } from '../services/FetchApi';
+import SectionLine from './SectionLine';
 
 const copy = require('clipboard-copy');
 
@@ -87,46 +89,102 @@ function FoodInProgress(props) {
     }
   };
 
+  const returnPage = () => {
+    history.push(`/foods/${id}`);
+  };
+
   return (
     recipe.map((rec) => {
       const { strMealThumb, strMeal, strCategory, strInstructions } = rec;
       return (
-        <div key={ strMeal }>
+        <Container
+          className="p-0 m-0"
+          style={ { backgroundColor: '#e9ecef' } }
+          key={ strMeal }
+        >
+          <button
+            type="button"
+            className="text-black m-2 return-button"
+            onClick={ returnPage }
+          >
+            {'<'}
+          </button>
           <img
             src={ strMealThumb }
             alt={ strMeal }
+            className="recipe-image"
             data-testid="recipe-photo"
           />
-          <p data-testid="recipe-title">{ strMeal }</p>
-          {
-            isCoppied && <span>Link copied!</span>
-          }
-          <input
-            type="image"
-            alt={ `Compartilhar receita de ${path.includes('/foods')
-              ? recipe.strMeal : recipe.strDrink}` }
-            src={ shareIcon }
-            onClick={ copyToClipBoard }
-            data-testid="share-btn"
-          />
-          <input
-            type="image"
-            alt={ `Desfavoritar receita de ${path.includes('/foods')
-              ? recipe.strMeal : recipe.strDrink}` }
-            src={ favoriteIcon }
-            onClick={ saveFavoriteRecipe }
-            data-testid="favorite-btn"
-          />
-          <p data-testid="recipe-category">{ strCategory }</p>
-          <CheckboxIngredients
-            ingredients={ getIngredients() }
-            history={ history }
-            recipe={ rec }
-            path={ path }
-            id={ id }
-          />
-          <p data-testid="instructions">{ strInstructions }</p>
-        </div>
+          <header className="d-flex justify-content-between align-item-center">
+            <div className="mt-1">
+              <h2
+                data-testid="recipe-title"
+                className=" ml-3 mt-3 d-inline mb-0 pb-0 recipe-title"
+              >
+                { strMeal }
+              </h2>
+              <h3
+                className="ml-3 mt-0 fs-4 pt-0 normal-text"
+                data-testid="recipe-category"
+              >
+                { strCategory }
+              </h3>
+            </div>
+            <div className="mt-2">
+              {
+                isCoppied && <span className="section-title">Link copied!</span>
+              }
+              <input
+                className="border-0 mr-2"
+                type="image"
+                alt={ `Compartilhar receita de ${path.includes('/foods')
+                  ? recipe.strMeal : recipe.strDrink}` }
+                src={ shareIcon }
+                onClick={ copyToClipBoard }
+                data-testid="share-btn"
+              />
+              <input
+                width="26"
+                className="border-0 mr-2"
+                type="image"
+                alt={ `Desfavoritar receita de ${path.includes('/foods')
+                  ? recipe.strMeal : recipe.strDrink}` }
+                src={ favoriteIcon }
+                onClick={ saveFavoriteRecipe }
+                data-testid="favorite-btn"
+              />
+            </div>
+          </header>
+          <SectionLine />
+          <Container className="mb-1">
+            <span
+              className="fs-5 section-title"
+            >
+              INGREDIENTS
+            </span>
+            <CheckboxIngredients
+              ingredients={ getIngredients() }
+              history={ history }
+              recipe={ rec }
+              path={ path }
+              id={ id }
+            />
+          </Container>
+          <SectionLine />
+          <Container>
+            <span
+              className="fs-5 section-title"
+            >
+              INSTRUCTIONS
+              <p
+                data-testid="instructions"
+                className="ml-1 mr-1 fs-5 normal-text"
+              >
+                { strInstructions }
+              </p>
+            </span>
+          </Container>
+        </Container>
       );
     })
   );

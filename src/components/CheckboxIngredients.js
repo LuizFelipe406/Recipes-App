@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './CheckboxIngredient.css';
+import { Button } from 'react-bootstrap';
 import { saveIngredients } from '../services/localStorage';
 import RecipeContext from '../context/RecipeContext';
 
@@ -13,6 +14,8 @@ function CheckboxIngredient(props) {
     meals: {},
     cocktails: {},
   });
+
+  const { doneRecipes, setDoneRecipes } = useContext(RecipeContext);
 
   useEffect(() => {
     const inProgressRecipesStr = localStorage.getItem('inProgressRecipes')
@@ -32,8 +35,6 @@ function CheckboxIngredient(props) {
       setIngredientesMarked(inProgressRecipes.cocktails[id]);
     }
   }, [id, path, inProgressRecipes]);
-
-  const { doneRecipes, setDoneRecipes } = useContext(RecipeContext);
 
   useEffect(() => {
     const enabledButton = () => {
@@ -103,7 +104,7 @@ function CheckboxIngredient(props) {
   };
 
   return (
-    <div>
+    <div className="d-flex justify-content-center align-items-center flex-wrap mb-4">
       { ingredientsMarked && ingredients.map((ingredient, i) => (
         <label
           htmlFor={ ingredient }
@@ -133,14 +134,15 @@ function CheckboxIngredient(props) {
         </label>
       ))}
       <div>
-        <button
+        <Button
+          variant={ isDisabled ? 'danger' : 'primary' }
           type="button"
           disabled={ isDisabled }
           onClick={ finishRecipe }
           data-testid="finish-recipe-btn"
         >
           Finalizar Receita
-        </button>
+        </Button>
       </div>
     </div>
   );

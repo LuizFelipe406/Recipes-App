@@ -42,7 +42,6 @@ function RecipeInProgress(props) {
 
   return (
     <div>
-      <h3>Receitas em progresso</h3>
       <div>
         {
           path.includes('foods')
