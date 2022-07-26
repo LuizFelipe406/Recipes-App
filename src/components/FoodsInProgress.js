@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { Container } from 'react-bootstrap';
 import CheckboxIngredients from './CheckboxIngredients';
 import shareIcon from '../images/shareIcon.svg';
@@ -14,7 +15,6 @@ function FoodInProgress(props) {
   const { recipe, path, id, history } = props;
   const ingredients = [];
 
-  const [isCoppied, setIsCoppied] = useState(false);
   const [recipes, setRecipes] = useState({});
   const [favoriteIcon, setFavoriteIcon] = useState('');
 
@@ -57,9 +57,8 @@ function FoodInProgress(props) {
   };
 
   const copyToClipBoard = () => {
-    if (isCoppied) copy('');
-    else copy(`http://localhost:3000${path}`);
-    setIsCoppied((oldState) => !oldState);
+    copy(`http://localhost:3000${path}`);
+    toast.success('Link copied!');
   };
 
   const saveFavoriteRecipe = () => {
@@ -79,6 +78,7 @@ function FoodInProgress(props) {
       );
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
       setFavoriteRecipes(newFavoriteRecipes);
+      toast.warning('Unfavorited recipe!', { style: { backgroundColor: '#e74c3c' } });
     } else {
       newFavoriteRecipes = [
         ...favoriteRecipes,
@@ -86,6 +86,7 @@ function FoodInProgress(props) {
       ];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
       setFavoriteRecipes(newFavoriteRecipes);
+      toast.success('Added to favorites!');
     }
   };
 
@@ -131,9 +132,6 @@ function FoodInProgress(props) {
               </h3>
             </div>
             <div className="mt-2">
-              {
-                isCoppied && <span className="section-title">Link copied!</span>
-              }
               <input
                 className="border-0 mr-2"
                 type="image"

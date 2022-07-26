@@ -1,9 +1,10 @@
+import { toast } from 'react-toastify';
+
 const copy = require('clipboard-copy');
 
-export const copyToClipBoard = (setIsCoppied, isCoppied, pathname) => {
-  if (isCoppied) copy('');
-  else copy(`http://localhost:3000${pathname}`);
-  setIsCoppied((oldState) => !oldState);
+export const copyToClipBoard = (pathname) => {
+  copy(`http://localhost:3000${pathname}`);
+  toast.success('Link copied!');
 };
 
 export const saveFavoriteRecipe = (
@@ -25,6 +26,7 @@ export const saveFavoriteRecipe = (
     );
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     setFavoriteRecipes(newFavoriteRecipes);
+    toast.warning('Unfavorited recipe!', { style: { backgroundColor: '#e74c3c' } });
   } else {
     newFavoriteRecipes = [
       ...favoriteRecipes,
@@ -32,6 +34,7 @@ export const saveFavoriteRecipe = (
     ];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     setFavoriteRecipes(newFavoriteRecipes);
+    toast.success('Added to favorites!');
   }
 };
 
