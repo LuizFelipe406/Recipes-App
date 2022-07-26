@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Card, Container, Row } from 'react-bootstrap';
+import { Card, Row } from 'react-bootstrap';
 import Header from '../components/Header';
 import DoneFavFilter from '../components/DoneFavFilter';
 import RecipeContext from '../context/RecipeContext';
@@ -72,20 +72,22 @@ function DoneRecipes({ history: { location: { pathname } } }) {
   );
 
   return (
-    <Container
-      className="p-0 m-0 d-flex flex-column
-    justify-content-center align-items-center page-container"
+    <div
+      className="p-0 m-0 page-container"
     >
       <Header pathname={ pathname } />
       <DoneFavFilter pathname={ pathname } />
-      <Row
-        xs={ 1 }
-        md={ 4 }
-        className="g-4 p-0 m-0 mx-2 mb-5 card-container mt-3"
-      >
-        { filteredRecipes.length > 0 && filteredRecipes.map(createRecipeCards) }
-      </Row>
-    </Container>
+      <div className="row-container">
+        <Row
+          xs={ 1 }
+          md={ 2 }
+          lg={ 3 }
+          className="g-4 p-0 m-0 mx-2 mb-5 card-container mt-3 gap-md-1"
+        >
+          { filteredRecipes.length > 0 && filteredRecipes.map(createRecipeCards) }
+        </Row>
+      </div>
+    </div>
   );
 }
 
