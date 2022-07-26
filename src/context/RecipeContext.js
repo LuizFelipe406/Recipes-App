@@ -23,7 +23,6 @@ export function RecipeProvider({ children }) {
   const [data, setData] = useState(false);
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
-  // const [inProgressRecipes, setInProgressRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [categories, setCategories] = useState({
     foodCategories: [],

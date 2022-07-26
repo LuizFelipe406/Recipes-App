@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
+import './Header.css';
 
 function Header({ pathname }) {
   const [title, setTitle] = useState('');
@@ -42,7 +43,8 @@ function Header({ pathname }) {
   return (
     <Container className="p-0 m-0">
       <header
-        className="d-flex justify-content-between align-items-center text-bg-success py-2"
+        className="d-flex justify-content-between
+        align-items-center text-bg-success py-2 header-container"
       >
         <Link to="/profile">
           <img

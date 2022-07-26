@@ -8,6 +8,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import RecipeContext from '../context/RecipeContext';
 import { fetchDrinkById, fetchFoodById } from '../services/FetchApi';
 import SectionLine from './SectionLine';
+import './InProgress.css';
 
 const copy = require('clipboard-copy');
 
@@ -98,9 +99,8 @@ function FoodInProgress(props) {
     recipe.map((rec) => {
       const { strMealThumb, strMeal, strCategory, strInstructions } = rec;
       return (
-        <Container
-          className="p-0 m-0"
-          style={ { backgroundColor: '#e9ecef' } }
+        <div
+          className="p-0 m-0 inprogress-main-container"
           key={ strMeal }
         >
           <button
@@ -116,8 +116,16 @@ function FoodInProgress(props) {
             className="recipe-image"
             data-testid="recipe-photo"
           />
-          <header className="d-flex justify-content-between align-item-center">
-            <div className="mt-1">
+          <header
+            className="d-flex
+            justify-content-lg-center
+            justify-content-between align-item-center"
+          >
+            <div
+              className="mt-1 mr-lg-5
+              ml-md-4
+              d-lg-flex flex-column align-items-lg-center justify-content-lg-center"
+            >
               <h2
                 data-testid="recipe-title"
                 className=" ml-3 mt-3 d-inline mb-0 pb-0 recipe-title"
@@ -131,7 +139,10 @@ function FoodInProgress(props) {
                 { strCategory }
               </h3>
             </div>
-            <div className="mt-2">
+            <div
+              className="mt-2 mr-2 mr-md-4
+          d-lg-flex align-items-lg-center justify-content-lg-center"
+            >
               <input
                 className="border-0 mr-2"
                 type="image"
@@ -182,7 +193,7 @@ function FoodInProgress(props) {
               </p>
             </span>
           </Container>
-        </Container>
+        </div>
       );
     })
   );

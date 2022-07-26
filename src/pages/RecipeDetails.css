@@ -41,3 +41,19 @@
   font-family: Titan One , sans-serif;
   opacity: 1;
 }
+
+.details-main-container {
+  background-color: #e9ecef;
+  height: 200vh;
+  left: 0;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 11;
+}
+
+.adjust-size {
+  background-color: #e9ecef;
+  width: 100vw;
+}

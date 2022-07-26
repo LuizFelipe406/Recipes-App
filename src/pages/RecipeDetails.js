@@ -105,7 +105,7 @@ function RecipeDetails({ history, match }) {
   }, [pathname]);
 
   return (
-    <Container className="p-0 m-0" style={ { backgroundColor: '#e9ecef' } }>
+    <div className="p-0 m-0 details-main-container">
       <button
         type="button"
         className="text-black m-2 return-button"
@@ -119,8 +119,16 @@ function RecipeDetails({ history, match }) {
         className="recipe-image"
         data-testid="recipe-photo"
       />
-      <header className="d-flex justify-content-between align-item-center">
-        <div className="mt-1">
+      <header
+        className="d-flex
+      justify-content-lg-center
+      justify-content-between align-item-center adjust-size"
+      >
+        <div
+          className="mt-1 mr-lg-5
+          ml-md-4
+          d-lg-flex flex-column align-items-lg-center justify-content-lg-center"
+        >
           <h2
             className=" ml-3 mt-3 d-inline mb-0 pb-0 recipe-title"
             data-testid="recipe-title"
@@ -134,7 +142,10 @@ function RecipeDetails({ history, match }) {
             { pathname.includes('/foods') ? recipe.strCategory : recipe.strAlcoholic }
           </h3>
         </div>
-        <div className="mt-2">
+        <div
+          className="mt-2 mr-2 mr-md-4
+          d-lg-flex align-items-lg-center justify-content-lg-center"
+        >
           <input
             className="border-0 mr-2"
             type="image"
@@ -159,7 +170,7 @@ function RecipeDetails({ history, match }) {
         </div>
       </header>
       <SectionLine />
-      <Container className="mb-1">
+      <Container className="mb-1 adjust-size">
         <span
           className="fs-5 section-title"
         >
@@ -180,7 +191,7 @@ function RecipeDetails({ history, match }) {
         </ul>
       </Container>
       <SectionLine />
-      <Container>
+      <Container className="adjust-size">
         <span
           className="fs-5 section-title"
         >
@@ -208,7 +219,7 @@ function RecipeDetails({ history, match }) {
         )
       }
       <SectionLine />
-      <Container className="mb-2">
+      <Container className="mb-2 adjust-size">
         <Recomendations recomendations={ recomendations } pathname={ pathname } />
       </Container>
       {
@@ -225,7 +236,7 @@ function RecipeDetails({ history, match }) {
           </button>
         )
       }
-    </Container>
+    </div>
   );
 }
 

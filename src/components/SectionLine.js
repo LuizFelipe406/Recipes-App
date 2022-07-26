@@ -5,7 +5,11 @@ function SectionLine() {
     <div
       className="mt-2 mb-3"
       style={ {
-        margin: '0 auto', width: '90vw', height: '0.5px', border: '0.5px solid #ced4da',
+        margin: '0 auto',
+        width: '90vw',
+        height: '0.5px',
+        border: '0.5px solid #ced4da',
+        backgroundColor: '#e9ecef',
       } }
     />
   );

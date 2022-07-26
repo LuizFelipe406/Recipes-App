@@ -28,20 +28,21 @@ function Recipes({ history: { location: { pathname } } }) {
   return (
     <Container
       fluid
-      className="p-0 m-0 pb-3 main-container"
+      className="p-0 m-0 pb-4 main-container"
     >
       <Header pathname={ pathname } />
       <CategoryFilters pathname={ pathname } />
       <Row
         xs={ 2 }
+        sm={ 3 }
         md={ 4 }
-        className="g-4 p-0 m-0 mx-2 mb-5"
+        className="g-4 p-0 m-0 mb-5 mx-2 mb-5 row-class"
       >
         {
           data && data.map((item, index) => (
-            <Col key={ index } className="p-2 m-0">
+            <Col key={ index } className="p-0 m-0 my-2">
               <Link
-                className="p-0 m-0"
+                className="p-0 m-0 recipe-container"
                 to={
                   pathname === '/foods'
                     ? `/foods/${item.idMeal}` : `/drinks/${item.idDrink}`
