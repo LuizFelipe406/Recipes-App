@@ -26,6 +26,7 @@ export const saveFavoriteRecipe = (
     );
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     setFavoriteRecipes(newFavoriteRecipes);
+    toast.warning('Unfavorited recipe!', { style: { backgroundColor: '#e74c3c' } });
   } else {
     newFavoriteRecipes = [
       ...favoriteRecipes,
@@ -33,6 +34,7 @@ export const saveFavoriteRecipe = (
     ];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     setFavoriteRecipes(newFavoriteRecipes);
+    toast.success('Added to favorites!');
   }
 };
 

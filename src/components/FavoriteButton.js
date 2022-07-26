@@ -13,7 +13,8 @@ function FavoriteButton({ recipe: { id, name }, index }) {
     );
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
     setFavoriteRecipes(newFavorites);
-    toast.error('Unfavorited recipe!');
+    const options = { style: { backgroundColor: '#e74c3c' } };
+    toast.warning('Unfavorited recipe!', options);
   };
 
   return (

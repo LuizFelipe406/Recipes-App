@@ -19,6 +19,7 @@ function App() {
       <ToastContainer
         theme="colored"
         toastStyle={ { backgroundColor: '#198754' } }
+        autoClose={ 1500 }
       />
       <Switch>
         <Route path="/foods/:id/in-progress" component={ RecipeInProgress } />
