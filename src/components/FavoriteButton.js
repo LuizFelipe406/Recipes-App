@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Proptypes from 'prop-types';
+import { toast } from 'react-toastify';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import RecipeContext from '../context/RecipeContext';
 
@@ -12,6 +13,7 @@ function FavoriteButton({ recipe: { id, name }, index }) {
     );
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
     setFavoriteRecipes(newFavorites);
+    toast.error('Unfavorited recipe!');
   };
 
   return (
