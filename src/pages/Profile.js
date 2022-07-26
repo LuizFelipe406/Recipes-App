@@ -11,17 +11,18 @@ function Profile({ history: { location: { pathname } } }) {
   const email = getEmail();
   const history = useHistory();
   return (
-    <Container
-      className="d-flex
-      flex-column justify-content-center align-items-center p-0 m-0 main-container"
+    <div
+      className="p-0 m-0 profile-main-container"
     >
       <Header pathname={ pathname } />
-      <span
-        data-testid="profile-email"
-        className="fs-1 mt-0 m-4 user-email"
-      >
-        {email}
-      </span>
+      <div className="email-container">
+        <span
+          data-testid="profile-email"
+          className="fs-1 mt-0 m-4 user-email"
+        >
+          {email}
+        </span>
+      </div>
       <Container
         className="d-flex flex-column
         justify-content-center align-items-center buttons-container"
@@ -55,7 +56,7 @@ function Profile({ history: { location: { pathname } } }) {
         </Button>
       </Container>
       <Footer />
-    </Container>
+    </div>
   );
 }
 
