@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import './CheckboxIngredient.css';
+import '../style/CheckboxIngredient.css';
 import { Button } from 'react-bootstrap';
 import { saveIngredients } from '../services/localStorage';
 import RecipeContext from '../context/RecipeContext';

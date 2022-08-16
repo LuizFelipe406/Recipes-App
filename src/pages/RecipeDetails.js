@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 import {
   fetchDrinkById, fetchDrinkRecomendations, fetchFoodById, fetchFoodRecomendations,
 } from '../services/FetchApi';
-import './RecipeDetails.css';
+import '../style/RecipeDetails.css';
 import RecipeContext from '../context/RecipeContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';

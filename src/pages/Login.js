@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container, Form } from 'react-bootstrap';
 import { cleanLocalStorage, saveLocalStorage } from '../services/localStorage';
-import './Login.css';
+import '../style/Login.css';
 
 function Login(props) {
   const [email, setEmail] = useState('');

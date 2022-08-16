@@ -7,7 +7,7 @@ import DoneFavFilter from '../components/DoneFavFilter';
 import RecipeContext from '../context/RecipeContext';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
-import './FavoriteRecipes.css';
+import '../style/FavoriteRecipes.css';
 
 function FavoriteRecipes({ history: { location: { pathname } } }) {
   const { favoriteRecipes, filteredRecipes,

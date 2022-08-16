@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ButtonGroup, Button } from 'react-bootstrap';
 import RecipeContext from '../context/RecipeContext';
-import './DoneFavFilter.css';
+import '../style/DoneFavFilter.css';
 
 function DoneFavFilter({ pathname }) {
   const { doneRecipes, favoriteRecipes, setFilteredRecipes } = useContext(RecipeContext);

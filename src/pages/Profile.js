@@ -5,7 +5,7 @@ import { Button, Container } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { getEmail } from '../services/localStorage';
-import './Profile.css';
+import '../style/Profile.css';
 
 function Profile({ history: { location: { pathname } } }) {
   const email = getEmail();

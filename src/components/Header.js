@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
-import './Header.css';
+import '../style/Header.css';
 
 function Header({ pathname }) {
   const [title, setTitle] = useState('');

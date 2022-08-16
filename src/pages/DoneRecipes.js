@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import DoneFavFilter from '../components/DoneFavFilter';
 import RecipeContext from '../context/RecipeContext';
 import ShareButton from '../components/ShareButton';
-import './DoneRecipes.css';
+import '../style/DoneRecipes.css';
 
 function DoneRecipes({ history: { location: { pathname } } }) {
   const { doneRecipes, filteredRecipes, setFilteredRecipes } = useContext(RecipeContext);

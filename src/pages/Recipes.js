@@ -8,7 +8,7 @@ import { fetchDrinks, fetchFoods } from '../services/FetchApi';
 import Header from '../components/Header';
 import CategoryFilters from '../components/CategoryFilters';
 import Footer from '../components/Footer';
-import './Recipes.css';
+import '../style/Recipes.css';
 
 function Recipes({ history: { location: { pathname } } }) {
   const { data, setData } = useContext(RecipeContext);

@@ -8,7 +8,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import RecipeContext from '../context/RecipeContext';
 import { fetchDrinkById, fetchFoodById } from '../services/FetchApi';
 import SectionLine from './SectionLine';
-import './InProgress.css';
+import '../style/InProgress.css';
 
 const copy = require('clipboard-copy');
 
