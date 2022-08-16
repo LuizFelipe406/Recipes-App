@@ -44,7 +44,7 @@
 
 .details-main-container {
   background-color: #e9ecef;
-  height: 200vh;
+  height: fit-content;
   left: 0;
   min-height: 100vh;
   position: absolute;
