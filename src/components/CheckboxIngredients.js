@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import { saveIngredients } from '../services/localStorage';
 import RecipeContext from '../context/RecipeContext';
 
+// eslint-disable-next-line
 function CheckboxIngredient(props) {
   const { ingredients, history, recipe, path, id } = props;
 

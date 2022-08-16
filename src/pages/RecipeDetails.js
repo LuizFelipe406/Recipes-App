@@ -15,6 +15,7 @@ import {
 import SectionLine from '../components/SectionLine';
 import Recomendations from '../components/RecipeDetailsRecomendations';
 
+// eslint-disable-next-line
 function RecipeDetails({ history, match }) {
   const START_RECIPE = 'Start Recipe';
   const { location: { pathname } } = history;
