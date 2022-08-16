@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import imageDrink from '../images/drinkIcon.svg';
 import imageMeal from '../images/mealIcon.svg';
-import './Footer.css';
+import '../style/Footer.css';
 
 function Footer() {
   return (
