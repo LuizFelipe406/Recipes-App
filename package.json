@@ -1,6 +1,7 @@
 {
   "name": "recipes-app-test",
   "version": "0.1.0",
+  "homepage": "https://luizfelipe406.github.io/Recipes-App/",
   "private": true,
   "engines": {
     "node": "16"
